@@ -1,11 +1,23 @@
 <h1>Sleep-well</h1>
 
-<div class="nav3" style="height:705px;">
-    <div id="icons"><img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
-    </div>
-    <div id="icons"><img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
-    </div>
-</div>
+
+<div class="row at-row justify-content-center">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                    <img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
+                </div>
+            </div> 
+        </div>  			
+		
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
+                </div>
+            </div>  
+        </div> 			
+	</div>
 
 <h2>Nice to have</h2>
 - graf spánku<br>
