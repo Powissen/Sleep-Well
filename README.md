@@ -3,7 +3,7 @@
 
 <div class="align-center">
 <img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
-<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
+<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capturesss.PNG" alt="obrazok" width="205" height="360">
 </div>
 
 
