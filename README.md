@@ -1,14 +1,14 @@
 <h1>Sleep-well</h1>
 <h2>Nice to have</h2>
-- graf spánku<br>
-- keď spíš niaky čas získaš niečo
+- Graf spánku<br>
+- Odmeny za určitý čas spánku
 <h2>Good to have</h2>
-- vyhodnotenie spánku(ako si sa vyspal)<br>
-- upozernenie 15 minut dopredu choď spať
+- Vyhodnotenie spánku(ako si sa vyspal)<br>
+- Upozornenie 15 minút pred spaním
 <h2>Must have</h2>
-- úvodná obrazovka<br>
-- logo<br>
-- nastavenia<br>
-- budík<br>
-- vypočítanie času zobudenia<br>
-- tlačítko idem spať
+- Úvodná obrazovka<br>
+- Logo aplikácie<br>
+- Nastavenia<br>
+- Budík<br>
+- Vypočítanie času zobudenia<br>
+- Tlačítko idem spať
