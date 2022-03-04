@@ -1,10 +1,7 @@
 <h1>Sleep-well</h1>
 
 
-<div class="align-center">
-<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
-<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capturesss.PNG" alt="obrazok" width="205" height="360">
-</div>
+
 
 
 <h2>Nice to have</h2>
@@ -20,3 +17,8 @@
 - budík<br>
 - vypočítanie času zobudenia<br>
 - tlačítko idem spať
+<h2>Screenshoty</h2>
+<div class="align-center">
+<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
+<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capturesss.PNG" alt="obrazok" width="205" height="360">
+</div>
