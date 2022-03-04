@@ -16,7 +16,6 @@
 <h2>Must have</h2>
 - úvodná obrazovka<br>
 - logo<br>
-
 - nastavenia<br>
 - budík<br>
 - vypočítanie času zobudenia<br>
