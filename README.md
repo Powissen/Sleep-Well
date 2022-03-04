@@ -1,14 +1,17 @@
 <h1>Sleep-well</h1>
+<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capture.PNG" alt="obrazok" width="205" height="360">
+<img src="https://github.com/Ondrejmuran4691/Sleep-well/blob/main/Capturesss.PNG" alt="obrazok" width="205" height="360">
 <h2>Nice to have</h2>
-- Graf spánku<br>
-- Odmeny za určitý čas spánku
+- graf spánku<br>
+- keď spíš niaky čas získaš niečo
 <h2>Good to have</h2>
-- Vyhodnotenie spánku(ako si sa vyspal)<br>
-- Upozornenie 15 minút pred spaním
+- vyhodnotenie spánku(ako si sa vyspal)<br>
+- upozernenie 15 minut dopredu choď spať
 <h2>Must have</h2>
-- Úvodná obrazovka<br>
-- Logo aplikácie<br>
-- Nastavenia<br>
-- Budík<br>
-- Vypočítanie času zobudenia<br>
-- Tlačítko idem spať
+- úvodná obrazovka<br>
+- logo<br>
+
+- nastavenia<br>
+- budík<br>
+- vypočítanie času zobudenia<br>
+- tlačítko idem spať
