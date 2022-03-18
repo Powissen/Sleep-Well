@@ -1,34 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sleep_well.MainPage">
+             x:Class="Sleep_well.MainPage"
+             BackgroundImageSource="background.jpg">
 
     <StackLayout>
-        <BoxView Color="Silver" 
-         WidthRequest="400"
-         HeightRequest="45"
-         HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
+            <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+        </Frame>
 
 
-        <Label HorizontalOptions="Center">Odporúčaný čas ísť spať je xxxx</Label>
-        <Label HorizontalOptions="Center">Budík o 6 hodín 5 minút</Label>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0" Spacing="50">
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  >
-            <Button Text="Posunúť o 10 minút"
-              BorderWidth="1" 
-            />
-
-
-            <Button Text="Idem spať"
-               BorderWidth="1"
-            />
-        
-        
-            
+            <Button Text="Aktualizovať čas" Clicked="RefreshTime" FontSize="20" />
 
         </StackLayout>
 
+        <Label 
+            x:Name="time"
+            Text="*" 
+            HorizontalOptions="Center" 
+            FontSize="80"
+            TextColor="White"
+            Padding="0,60,0,0"/>
 
+
+        <Label Text="Budík nastavený na 6:00" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
+
+        <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,00,0" FontSize="20"/>
+        <Label x:Name="alarmAfter" Text="Budík o ? hodín a ? minút" HorizontalTextAlignment="Center" TextColor="White" Padding="0,5,0,0" FontSize="20"/>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,40,0,0" Spacing="50">
+
+            <Button Text="Posunúť o 10 minút"
+              BorderWidth="10" />
+            <Button Text="Idem spať"
+               BorderWidth="1"/>
+        </StackLayout>
     </StackLayout>
-
 </ContentPage>
