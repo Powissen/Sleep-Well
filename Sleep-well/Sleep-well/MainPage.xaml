@@ -1,20 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Sleep_well.MainPage"
+             x:Class="SleepWell.MainPage"
              BackgroundImageSource="background.jpg">
+
 
     <StackLayout>
 
-        <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
-            <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
-        </Frame>
+        <Grid>
+            <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
+                <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            </Frame>
+            <Button Text="Settings" Clicked="OpenSettings" FontSize="20" HorizontalOptions="End"/>
+        </Grid>
 
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0" Spacing="50">
 
             <Button Text="Aktualizovať čas" Clicked="RefreshTime" FontSize="20" />
-
+            
         </StackLayout>
 
         <Label 
@@ -26,17 +30,20 @@
             Padding="0,60,0,0"/>
 
 
-        <Label Text="Budík nastavený na 6:00" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
+        <Label x:Name="AlarmClock" Text="Budík nenastavený" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
 
         <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,00,0" FontSize="20"/>
-        <Label x:Name="alarmAfter" Text="Budík o ? hodín a ? minút" HorizontalTextAlignment="Center" TextColor="White" Padding="0,5,0,0" FontSize="20"/>
+        <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="White" Padding="0,5,0,0" FontSize="20"/>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,40,0,0" Spacing="50">
 
-            <Button Text="Posunúť o 10 minút"
+            <Button Text="Idem spať o 10 minút"
+                    Clicked="o10"
               BorderWidth="10" />
             <Button Text="Idem spať"
-               BorderWidth="1"/>
+               BorderWidth="1"
+                    Clicked="o0"/>
+
         </StackLayout>
     </StackLayout>
 </ContentPage>

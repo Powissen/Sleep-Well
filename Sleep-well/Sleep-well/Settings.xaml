@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepWell.Settings">
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <Grid>
+                <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
+                    <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+                </Frame>
+                <Button Text="Home" Clicked="OpenMainPage" FontSize="20" HorizontalOptions="End"/>
+            </Grid>
+
+
+            <Line Stroke="Black" X2="500" />
+            <Grid>
+                <Label Text="Povliť zobudenie skôr o" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
+                <Label Text="Tu bude na vyber cas" HorizontalOptions="End" TextColor="Black" FontSize="15" />
+            </Grid>   
+            <Line Stroke="Black" X2="500" />
+            <Grid>
+                <Label Text="Povliť 24 hodínový formát času" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
+                <CheckBox HorizontalOptions="End"/>
+            </Grid>
+            <Line Stroke="Black" X2="500" />
+            <Grid>
+                <Label Text="Tmavý režim" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
+                <CheckBox HorizontalOptions="End"/>
+            </Grid>
+            <Line Stroke="Black" X2="500" />
+            <Grid>
+                <Label Text="Jazyk" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
+                <Label Text="Tu bude na vyber jazyk" HorizontalOptions="End" TextColor="Black" FontSize="15" />
+            </Grid>
+            <Line Stroke="Black" X2="500" />
+
+
+            <Frame BackgroundColor="Black" Padding="1" CornerRadius="0" VerticalOptions="EndAndExpand">
+                <Label Text="Version 0.1" HorizontalTextAlignment="Start" TextColor="White" FontSize="15"/>
+            </Frame>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
