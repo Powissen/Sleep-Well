@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SleepWell;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Sleep_well
+namespace SleepWell
 {
     public partial class App : Application
     {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.sleep_well" android:installLocation="internalOnly">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="23" />
-	<application android:label="Sleep_well.Android" android:theme="@style/MainTheme"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.sleepwell" android:installLocation="internalOnly">
+	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="23" />
+	<application android:label="SleepWell.Android" android:theme="@style/MainTheme"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
