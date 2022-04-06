@@ -106,6 +106,7 @@ namespace SleepWell
 
             }
         }
+
         void o10(object sender, EventArgs args)
         {
             int hours2 = DateTime.Now.Hour;
@@ -273,15 +274,58 @@ namespace SleepWell
 
             }
 
-            alarmAfter.Text = s;
+            string text = "vstavaj";
+            
+            public class AlarmClock
+{
+    public AlarmClock(DateTime alarmTime)
+    {
+        this.alarmTime = alarmTime;
 
-            if (Minutesbudik == DateTime.Now.Minute)
+        timer = new Timer();
+        timer.Elapsed += timer_Elapsed;
+        timer.Interval = 60;
+        timer.Start();
+
+        enabled = true;
+    }
+
+    void  timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+                if (Minutesbudik == DateTime.Now.Minute)
             {
                 if (Hoursbudik == DateTime.Now.Hour)
                 {
-                    alarmAfter.Text = ("vstávaj");
+                   {
+            enabled = false;
+            OnAlarm();
+            timer.Stop();
+            AlarmClock clock = new AlarmClock(someFutureTime);
+            clock.Alarm += (sender, e) => MessageBox.Show("Wake up!");
+        } 
                 }
             }
+        
+    }
+
+    protected virtual void OnAlarm()
+    {
+        if(alarmEvent != null)
+            alarmEvent(this, EventArgs.Empty);
+    }
+
+
+    public event EventHandler Alarm
+    {
+        add { alarmEvent += value; }
+        remove { alarmEvent -= value; }
+    }
+
+    private EventHandler alarmEvent;
+    private Timer timer;
+    private DateTime alarmTime;
+    private bool enabled;
+}
         }
 
     }
