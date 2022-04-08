@@ -1,10 +1,5 @@
-﻿using SleepWell;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections;
 using Xamarin.Forms;
 
 namespace SleepWell
@@ -19,6 +14,8 @@ namespace SleepWell
         public MainPage()
         {
             InitializeComponent();
+
+
         }
 
         void OpenSettings(object sender, EventArgs args)
@@ -29,7 +26,6 @@ namespace SleepWell
 
         void RefreshTime(object sender, EventArgs args)
         {
-
             if (DateTime.Now.Minute < 10)
             {
                 time.Text = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
@@ -57,7 +53,6 @@ namespace SleepWell
             }
             else
             {
-
                 if ((-(DateTime.Now.Minute - Minutesbudik)) < 0)
                 {
                     if (DateTime.Now.Hour > 15)
@@ -80,9 +75,6 @@ namespace SleepWell
                         s = "Budík o " + (Hoursbudik - DateTime.Now.Hour).ToString() + " hodín a " + (-(DateTime.Now.Minute - Minutesbudik)).ToString() + " minút.";
                     }
                 }
-
-
-
             }
 
             alarmAfter.Text = s;
@@ -94,7 +86,6 @@ namespace SleepWell
                     alarmAfter.Text = ("vstávaj");
 
                 }
-
             }
             if (Minutesbudik + 1 == DateTime.Now.Minute)
             {
@@ -103,8 +94,8 @@ namespace SleepWell
                     alarmAfter.Text = ("nie je budik");
 
                 }
-
             }
+
         }
 
         void o10(object sender, EventArgs args)
@@ -274,59 +265,57 @@ namespace SleepWell
 
             }
 
-            string text = "vstavaj";
-            
-            public class AlarmClock
-{
-    public AlarmClock(DateTime alarmTime)
-    {
-        this.alarmTime = alarmTime;
-
-        timer = new Timer();
-        timer.Elapsed += timer_Elapsed;
-        timer.Interval = 60;
-        timer.Start();
-
-        enabled = true;
-    }
-
-    void  timer_Elapsed(object sender, ElapsedEventArgs e)
-    {
-                if (Minutesbudik == DateTime.Now.Minute)
-            {
-                if (Hoursbudik == DateTime.Now.Hour)
-                {
-                   {
-            enabled = false;
-            OnAlarm();
-            timer.Stop();
-            AlarmClock clock = new AlarmClock(someFutureTime);
-            clock.Alarm += (sender, e) => MessageBox.Show("Wake up!");
-        } 
-                }
-            }
-        
-    }
-
-    protected virtual void OnAlarm()
-    {
-        if(alarmEvent != null)
-            alarmEvent(this, EventArgs.Empty);
-    }
+        //    string text = "vstavaj";
 
 
-    public event EventHandler Alarm
-    {
-        add { alarmEvent += value; }
-        remove { alarmEvent -= value; }
-    }
+        //    public AlarmClock(DateTime alarmTime)
+        //    {
+        //        this.alarmTime = alarmTime;
 
-    private EventHandler alarmEvent;
-    private Timer timer;
-    private DateTime alarmTime;
-    private bool enabled;
-}
+        //        timer = new Timer();
+        //        timer.Elapsed += timer_Elapsed;
+        //        timer.Interval = 60;
+        //        timer.Start();
+
+        //        enabled = true;
+        //    }
+
+        //    void timer_Elapsed(object sender, ElapsedEventArgs e)
+        //    {
+        //        if (Minutesbudik == DateTime.Now.Minute)
+        //        {
+        //            if (Hoursbudik == DateTime.Now.Hour)
+        //            {
+        //                {
+        //                    enabled = false;
+        //                    OnAlarm();
+        //                    timer.Stop();
+        //                    AlarmClock clock = new AlarmClock(someFutureTime);
+        //                    clock.Alarm += (sender, e) => MessageBox.Show("Wake up!");
+        //                }
+        //            }
+        //        }
+
+        //    }
+
+        //    protected virtual void OnAlarm()
+        //    {
+        //        if (alarmEvent != null)
+        //            alarmEvent(this, EventArgs.Empty);
+        //    }
+
+
+        //    public event EventHandler Alarm
+        //    {
+        //        add { alarmEvent += value; }
+        //        remove { alarmEvent -= value; }
+        //    }
+
+        //    private EventHandler alarmEvent;
+        //    private Timer timer;
+        //    private DateTime alarmTime;
+        //    private bool enabled;
+        //}
         }
-
     }
 }

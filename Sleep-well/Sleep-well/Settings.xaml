@@ -7,15 +7,40 @@
     <ContentPage.Content>
 
         <StackLayout>
-
+            <!--Top menu-->
             <Grid>
                 <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
                     <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
                 </Frame>
-                <Button Text="Home" Clicked="OpenMainPage" FontSize="20" HorizontalOptions="End"/>
+                <Button Text="Home" Clicked="OpenMainPage" FontSize="20"  HorizontalOptions="End"/>
             </Grid>
+            
+            
+            <!--Alarm-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Povoliť budík:" TextColor="Black"/>
+                <Switch x:Name="_switch"
+                    HorizontalOptions="EndAndExpand"
+                    Toggled="OnSwitchToggled" />
+            </StackLayout>
+       
+            <Line Stroke="Black" X2="500" />
+            
+            <StackLayout>
+                <Label Text="Budík je nastavený na:" TextColor="Black" HorizontalOptions="Center" FontSize="20"/>
+                <TimePicker x:Name="_timePicker"
+                    Time="0:00:00"
+                    Format="T"
+                    TextColor="Black"
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    PropertyChanged="OnTimePickerPropertyChanged" />
+
+                <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="White" BackgroundColor="DarkGray"/>
+            </StackLayout>
 
 
+           <!--Settings options-->
             <Line Stroke="Black" X2="500" />
             <Grid>
                 <Label Text="Povliť zobudenie skôr o" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
@@ -29,7 +54,7 @@
             <Line Stroke="Black" X2="500" />
             <Grid>
                 <Label Text="Tmavý režim" HorizontalOptions="Start" TextColor="Black" FontSize="20" />
-                <CheckBox HorizontalOptions="End"/>
+                <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
             </Grid>
             <Line Stroke="Black" X2="500" />
             <Grid>
@@ -39,9 +64,8 @@
             <Line Stroke="Black" X2="500" />
 
 
-            <Frame BackgroundColor="Black" Padding="1" CornerRadius="0" VerticalOptions="EndAndExpand">
-                <Label Text="Version 0.1" HorizontalTextAlignment="Start" TextColor="White" FontSize="15"/>
-            </Frame>
+            <!--App version-->
+            <Label Text="Version 0.1" HorizontalOptions="Start" VerticalOptions="EndAndExpand" TextColor="DarkGray" FontSize="15" />
 
         </StackLayout>
         
