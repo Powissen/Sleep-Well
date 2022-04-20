@@ -7,27 +7,46 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Runtime;
+using Android.Media;
 
 namespace SleepWell
 {
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
+   
     public partial class Settings : ContentPage
     {
         DateTime _triggerTime;
-
-
-        public Settings()
+        public string music = "Nokia Ringtone Arabic 1 HOur.mp3";
+        protected MediaPlayer player;
+        public void StartPlayer(String filePath)
+        {
+            if (player == null)
+            {
+                player = new MediaPlayer();
+            }
+            else
+            {
+                player.Reset();
+                player.SetDataSource(filePath);
+                player.Prepare();
+                player.Start();
+            }
+        }
+            public Settings()
         {
             InitializeComponent();
             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
-        }
+            
+    }
 
         void OpenMainPage(object sender, EventArgs args)
         {
             App.Current.MainPage = new MainPage();
         }
 
-
+      
 
 
 
@@ -38,6 +57,7 @@ namespace SleepWell
             {
                 _switch.IsToggled = false;
                 DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
+                StartPlayer("ringtone.mp3");
             }
             return true;
         }
