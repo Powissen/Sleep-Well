@@ -13,6 +13,7 @@ namespace SleepWell
     public partial class Settings : ContentPage
     {
         public string textColour { get; set; } = "Black";
+        public string barColour { get; set; } = "LightGray";
 
         DateTime _triggerTime;
         //public string music = "Nokia Ringtone Arabic 1 HOur.mp3";
@@ -38,6 +39,9 @@ namespace SleepWell
 
             BindingContext = this;
 
+            LanguagePicker.Items.Add("Slovenčina");
+            LanguagePicker.Items.Add("English");
+            LanguagePicker.SelectedIndex = 0;
         }
 
         void OpenMainPage(object sender, EventArgs args)
@@ -91,15 +95,31 @@ namespace SleepWell
 
             if (DarkModeCheckBox.IsChecked)
             {
-                BackgroundColor = Color.FromHex("171717");
-                textColour = "White";
+                BackgroundColor = Color.FromHex("1f1f1f");
+                textColour = "DarkGray";
+                barColour = "Black";
                 OnPropertyChanged(nameof(textColour));
+                OnPropertyChanged(nameof(barColour));
             }
             else
             {
                 BackgroundColor = Color.White;
                 textColour = "Black";
+                barColour = "DarkGray";
                 OnPropertyChanged(nameof(textColour));
+                OnPropertyChanged(nameof(barColour));
+            }
+        }
+
+        private void LanguageChange(object sender, EventArgs e)
+        {
+            if (LanguagePicker.SelectedIndex == 0)
+            {
+                //SK
+            }
+            else
+            {
+                //EN
             }
         }
     }
