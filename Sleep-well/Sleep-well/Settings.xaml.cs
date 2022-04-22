@@ -110,6 +110,8 @@ namespace SleepWell
                 OnPropertyChanged(nameof(barColour));
             }
         }
+        
+        //Link na multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
 
         private void LanguageChange(object sender, EventArgs e)
         {
