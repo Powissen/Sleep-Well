@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-//using Android.Media;
 
 namespace SleepWell
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
 
     public partial class Settings : ContentPage
     {
@@ -16,22 +20,8 @@ namespace SleepWell
         public string barColour { get; set; } = "LightGray";
 
         DateTime _triggerTime;
-        //public string music = "Nokia Ringtone Arabic 1 HOur.mp3";
-        //protected MediaPlayer player;
-        //public void StartPlayer(String filePath)
-        //{
-        //    if (player == null)
-        //    {
-        //        player = new MediaPlayer();
-        //    }
-        //    else
-        //    {
-        //        player.Reset();
-        //        player.SetDataSource(filePath);
-        //        player.Prepare();
-        //        player.Start();
-        //    }
-        //}
+
+
         public Settings()
         {
             InitializeComponent();
@@ -42,6 +32,24 @@ namespace SleepWell
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
             LanguagePicker.SelectedIndex = 0;
+
+            BeforeAlarmPicker.Items.Add("5min");
+            BeforeAlarmPicker.Items.Add("10min");
+            BeforeAlarmPicker.Items.Add("15min");
+            BeforeAlarmPicker.Items.Add("20min");
+            BeforeAlarmPicker.Items.Add("25min");
+            BeforeAlarmPicker.Items.Add("30min");
+            BeforeAlarmPicker.SelectedIndex = 0;
+
+
+            //Toto je test ukladania - nevsimat ------------------------------------------
+            Saving saving = new Saving();
+
+            saving.test = "Toto je text co by sa mal ulozit";
+
+            string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+            File.WriteAllText(_fileName, saving.ToString());
+            //-----------------------------------------------------------------------------
         }
 
         void OpenMainPage(object sender, EventArgs args)
@@ -51,9 +59,7 @@ namespace SleepWell
 
 
 
-
-
-
+       // ---------- Timer ----------
         bool OnTimerTick()
         {
             if (_switch.IsToggled && DateTime.Now >= _triggerTime)
@@ -90,13 +96,14 @@ namespace SleepWell
             }
         }
 
+        // -------------------------------------------------------------------------------------------
         private void CheckBox_DarkMode(object sender, CheckedChangedEventArgs e)
         {
 
             if (DarkModeCheckBox.IsChecked)
             {
                 BackgroundColor = Color.FromHex("1f1f1f");
-                textColour = "DarkGray";
+                textColour = "LightGray";
                 barColour = "Black";
                 OnPropertyChanged(nameof(textColour));
                 OnPropertyChanged(nameof(barColour));
@@ -117,12 +124,16 @@ namespace SleepWell
         {
             if (LanguagePicker.SelectedIndex == 0)
             {
-                //SK
+                Header_Description.Text = "Nastavenia"; 
             }
             else
             {
-                //EN
+                Header_Description.Text = "Settings";
             }
+        }
+        private void BeforeAlarmChange(object sender, EventArgs e)
+        {
+            //Zmena času povolenia zobudenia skôr
         }
     }
 }

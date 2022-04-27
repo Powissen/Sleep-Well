@@ -9,7 +9,7 @@
             <!--Top menu-->
             <Grid>
             <Frame BackgroundColor="{Binding barColour}" Padding="10" CornerRadius="0">
-                <Label Text="Nastavenia" HorizontalTextAlignment="Center" TextColor="{Binding textColour}" FontSize="20"/>
+                <Label x:Name="Header_Description" Text="Nastavenia" HorizontalTextAlignment="Center" TextColor="{Binding textColour}" FontSize="20"/>
                 </Frame>
                 <Button Text="Domov" Clicked="OpenMainPage" FontSize="10"  HorizontalOptions="End"/>
             </Grid>
@@ -17,7 +17,7 @@
             
             <!--Alarm-->
             <StackLayout Orientation="Horizontal">
-            <Label Text="Povoliť budík:" TextColor="{Binding textColour}"/>
+            <Label Text="Povoliť budík:" TextColor="{Binding textColour}" VerticalOptions="Center"/>
                 <Switch x:Name="_switch"
                     HorizontalOptions="EndAndExpand"
                     Toggled="OnSwitchToggled" />
@@ -36,7 +36,7 @@
                     HorizontalOptions="Center"
                     PropertyChanged="OnTimePickerPropertyChanged" />
 
-            <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="{Binding textColour}" BackgroundColor="{Binding barColour}"/>
+            <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="LightGray" BackgroundColor="{Binding barColour}"/>
         </StackLayout>
 
 
@@ -45,12 +45,12 @@
         <!--Settings options-->
         <Line Stroke="Black" X2="500" />
             <Grid>
-            <Label Text="Povoliť zobudenie skôr o" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" />
-            <Label Text="Tu bude na vyber cas" HorizontalOptions="End" TextColor="{Binding textColour}" FontSize="10" />
+            <Label Text="Povoliť zobudenie skôr o" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center"/>
+            <Picker x:Name="BeforeAlarmPicker" TextColor="{Binding textColour}" SelectedIndexChanged="BeforeAlarmChange" HorizontalOptions="End" />
             </Grid>
         <Line Stroke="Black" X2="500" />
             <Grid>
-            <Label Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" />
+            <Label Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
                 <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
             </Grid>
         <Line Stroke="Black" X2="500" />

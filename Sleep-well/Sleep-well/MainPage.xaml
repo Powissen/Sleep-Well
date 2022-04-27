@@ -23,7 +23,7 @@
 
         <Label 
             x:Name="time"
-            Text="*" 
+            Text="{Binding Time}" 
             HorizontalOptions="Center" 
             FontSize="80"
             TextColor="White"

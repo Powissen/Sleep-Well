@@ -6,6 +6,7 @@ namespace SleepWell
 {
     public partial class MainPage : ContentPage
     {
+        public string Time { get; set; } = "";
         bool bud = true;
         string s = "";
         int Hoursbudik;
@@ -14,8 +15,17 @@ namespace SleepWell
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = this;
 
+            if (DateTime.Now.Minute < 10)
+            {
+                Time = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
+            }
+            else
+            {
 
+                Time = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
+            }
         }
 
         void OpenSettings(object sender, EventArgs args)
@@ -26,15 +36,15 @@ namespace SleepWell
 
         void RefreshTime(object sender, EventArgs args)
         {
-            if (DateTime.Now.Minute < 10)
-            {
-                time.Text = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
-            }
-            else
-            {
+            //if (DateTime.Now.Minute < 10)
+            //{
+            //    time.Text = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
+            //}
+            //else
+            //{
 
-                time.Text = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
-            }
+            //    time.Text = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
+            //}
             int hours;
             int minutes;
 
@@ -260,62 +270,8 @@ namespace SleepWell
                         s = "Budík o " + (Hoursbudik - DateTime.Now.Hour).ToString() + " hodín a " + (-(DateTime.Now.Minute - Minutesbudik)).ToString() + " minút.";
                     }
                 }
-
-
-
             }
 
-        //    string text = "vstavaj";
-
-
-        //    public AlarmClock(DateTime alarmTime)
-        //    {
-        //        this.alarmTime = alarmTime;
-
-        //        timer = new Timer();
-        //        timer.Elapsed += timer_Elapsed;
-        //        timer.Interval = 60;
-        //        timer.Start();
-
-        //        enabled = true;
-        //    }
-
-        //    void timer_Elapsed(object sender, ElapsedEventArgs e)
-        //    {
-        //        if (Minutesbudik == DateTime.Now.Minute)
-        //        {
-        //            if (Hoursbudik == DateTime.Now.Hour)
-        //            {
-        //                {
-        //                    enabled = false;
-        //                    OnAlarm();
-        //                    timer.Stop();
-        //                    AlarmClock clock = new AlarmClock(someFutureTime);
-        //                    clock.Alarm += (sender, e) => MessageBox.Show("Wake up!");
-        //                }
-        //            }
-        //        }
-
-        //    }
-
-        //    protected virtual void OnAlarm()
-        //    {
-        //        if (alarmEvent != null)
-        //            alarmEvent(this, EventArgs.Empty);
-        //    }
-
-
-        //    public event EventHandler Alarm
-        //    {
-        //        add { alarmEvent += value; }
-        //        remove { alarmEvent -= value; }
-        //    }
-
-        //    private EventHandler alarmEvent;
-        //    private Timer timer;
-        //    private DateTime alarmTime;
-        //    private bool enabled;
-        //}
         }
     }
 }
