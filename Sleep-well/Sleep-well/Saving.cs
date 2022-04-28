@@ -2,6 +2,8 @@
 {
     class Saving
     {
-        public string test;
+        public bool alarmEnabled;
+        public bool darkMode;
+        //public System.TimeSpan alarmTime;
     }
 }

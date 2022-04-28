@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Collections;
 using Xamarin.Forms;
 
@@ -6,6 +8,7 @@ namespace SleepWell
 {
     public partial class MainPage : ContentPage
     {
+        Saving saving = new Saving();
         public string Time { get; set; } = "";
         bool bud = true;
         string s = "";
@@ -26,6 +29,18 @@ namespace SleepWell
 
                 Time = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
             }
+            OnPropertyChanged(nameof(Time));
+
+            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt")).First());
+            if (saving.alarmEnabled == true)
+            {
+                alarmEnabled.Text = "Budík je zapnutý";
+            }
+            else
+            {
+                alarmEnabled.Text = "Budík je vypnutý";
+            }
+
         }
 
         void OpenSettings(object sender, EventArgs args)

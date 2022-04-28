@@ -14,13 +14,6 @@
             <Button Text="Nastavenia" Clicked="OpenSettings" FontSize="10" HorizontalOptions="End"/>
         </Grid>
 
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0" Spacing="50">
-
-            <Button Text="Aktualizovať čas" Clicked="RefreshTime" FontSize="20" />
-            
-        </StackLayout>
-
         <Label 
             x:Name="time"
             Text="{Binding Time}" 
@@ -30,12 +23,12 @@
             Padding="0,60,0,0"/>
 
 
-        <Label x:Name="AlarmClock" Text="Budík nenastavený" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
+        <Label x:Name="alarmEnabled" Text="" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
 
-        <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,00,0" FontSize="20"/>
-        <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="White" Padding="0,5,0,0" FontSize="20"/>
+        <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,100,00,0" FontSize="20"/>
+        <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,5,0,0" FontSize="20"/>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,40,0,0" Spacing="50">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,70,0,0" Spacing="50">
 
             <Button Text="Idem spať o 10 minút"
                     Clicked="o10"

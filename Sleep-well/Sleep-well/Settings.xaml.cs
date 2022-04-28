@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -18,8 +18,9 @@ namespace SleepWell
     {
         public string textColour { get; set; } = "Black";
         public string barColour { get; set; } = "LightGray";
-
         DateTime _triggerTime;
+        Saving saving = new Saving();
+        string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
 
 
         public Settings()
@@ -42,14 +43,28 @@ namespace SleepWell
             BeforeAlarmPicker.SelectedIndex = 0;
 
 
-            //Toto je test ukladania - nevsimat ------------------------------------------
-            Saving saving = new Saving();
+            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_fileName).First());
+            saving.darkMode = Convert.ToBoolean(File.ReadLines(_fileName).Last());
+            if (saving.alarmEnabled)
+            {
+                _switch.IsToggled = true;
+            }
 
-            saving.test = "Toto je text co by sa mal ulozit";
+            if (saving.darkMode)
+            {
+                DarkModeCheckBox.IsChecked = true;
+            }
 
-            string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
-            File.WriteAllText(_fileName, saving.ToString());
             //-----------------------------------------------------------------------------
+        }
+
+        void SaveData()
+        {
+            using (StreamWriter writer = new StreamWriter(_fileName, false))
+            {
+                writer.WriteLine(saving.alarmEnabled);
+                writer.WriteLine(saving.darkMode);
+            }
         }
 
         void OpenMainPage(object sender, EventArgs args)
@@ -88,12 +103,19 @@ namespace SleepWell
         {
             if (_switch.IsToggled)
             {
+                saving.alarmEnabled = true;
+
                 _triggerTime = DateTime.Today + _timePicker.Time;
                 if (_triggerTime < DateTime.Now)
                 {
                     _triggerTime += TimeSpan.FromDays(1);
                 }
             }
+            else
+            {
+                saving.alarmEnabled = false;
+            }
+            SaveData();
         }
 
         // -------------------------------------------------------------------------------------------
