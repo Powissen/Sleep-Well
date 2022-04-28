@@ -1,9 +1,11 @@
-﻿namespace SleepWell
+﻿using System;
+
+namespace SleepWell
 {
     class Saving
     {
         public bool alarmEnabled;
         public bool darkMode;
-        //public System.TimeSpan alarmTime;
+        //public DateTime alarmTime;
     }
 }

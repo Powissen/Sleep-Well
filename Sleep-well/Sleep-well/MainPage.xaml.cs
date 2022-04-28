@@ -9,6 +9,7 @@ namespace SleepWell
     public partial class MainPage : ContentPage
     {
         Saving saving = new Saving();
+        string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         public string Time { get; set; } = "";
         bool bud = true;
         string s = "";
@@ -31,7 +32,24 @@ namespace SleepWell
             }
             OnPropertyChanged(nameof(Time));
 
-            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt")).First());
+            //File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt")); -- ak treba v mobile restovat subor
+
+            if (!File.Exists(_filePath))
+            {
+                saving.alarmEnabled = false;
+                saving.darkMode = false;
+                //saving.alarmTime = DateTime.Now;
+
+                using (StreamWriter writer = new StreamWriter(_filePath, false))
+                {
+                    writer.WriteLine(saving.alarmEnabled);
+                    writer.WriteLine(saving.darkMode);
+                    //writer.WriteLine(saving.alarmTime);
+                }
+            }
+
+
+            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_filePath).First());
             if (saving.alarmEnabled == true)
             {
                 alarmEnabled.Text = "Budík je zapnutý";
@@ -40,7 +58,6 @@ namespace SleepWell
             {
                 alarmEnabled.Text = "Budík je vypnutý";
             }
-
         }
 
         void OpenSettings(object sender, EventArgs args)

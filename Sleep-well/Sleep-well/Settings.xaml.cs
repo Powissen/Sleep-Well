@@ -20,7 +20,7 @@ namespace SleepWell
         public string barColour { get; set; } = "LightGray";
         DateTime _triggerTime;
         Saving saving = new Saving();
-        string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+        string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
 
 
         public Settings()
@@ -43,8 +43,10 @@ namespace SleepWell
             BeforeAlarmPicker.SelectedIndex = 0;
 
 
-            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_fileName).First());
-            saving.darkMode = Convert.ToBoolean(File.ReadLines(_fileName).Last());
+            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_filePath).First());
+            saving.darkMode = Convert.ToBoolean(File.ReadLines(_filePath).Last());
+            //saving.alarmTime = DateTime.Parse(File.ReadLines(_filePath).Last());
+
             if (saving.alarmEnabled)
             {
                 _switch.IsToggled = true;
@@ -55,15 +57,15 @@ namespace SleepWell
                 DarkModeCheckBox.IsChecked = true;
             }
 
-            //-----------------------------------------------------------------------------
         }
 
         void SaveData()
         {
-            using (StreamWriter writer = new StreamWriter(_fileName, false))
+            using (StreamWriter writer = new StreamWriter(_filePath, false))
             {
                 writer.WriteLine(saving.alarmEnabled);
                 writer.WriteLine(saving.darkMode);
+                //writer.WriteLine(_timePicker.Time);
             }
         }
 
@@ -129,6 +131,8 @@ namespace SleepWell
                 barColour = "Black";
                 OnPropertyChanged(nameof(textColour));
                 OnPropertyChanged(nameof(barColour));
+                saving.darkMode = true;
+                SaveData();
             }
             else
             {
@@ -137,6 +141,8 @@ namespace SleepWell
                 barColour = "DarkGray";
                 OnPropertyChanged(nameof(textColour));
                 OnPropertyChanged(nameof(barColour));
+                saving.darkMode = false;
+                SaveData();
             }
         }
         
