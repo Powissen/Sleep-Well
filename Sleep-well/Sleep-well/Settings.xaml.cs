@@ -63,8 +63,14 @@ namespace SleepWell
             saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
-            _timePicker.Time = saving.alarmTime;
 
+
+            _timePicker.Time = TimeSpan.FromTicks(saving.alarmTime.Ticks);
+
+            if (saving.alarmEnabled)
+            {
+                _triggerTime = saving.alarmTime;
+            }
 
             if (saving.alarmEnabled)
             {

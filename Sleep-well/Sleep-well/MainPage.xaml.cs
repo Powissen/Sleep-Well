@@ -32,27 +32,30 @@ namespace SleepWell
             }
             OnPropertyChanged(nameof(Time));
 
-            //File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt")); -- ak treba v mobile restovat subor
+            File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt"));
 
             if (!File.Exists(_filePath))
             {
                 saving.alarmEnabled = false;
                 saving.darkMode = false;
-                //saving.alarmTime = DateTime.Now;
+                saving.alarmTime = DateTime.Now;
 
                 using (StreamWriter writer = new StreamWriter(_filePath, false))
                 {
                     writer.WriteLine(saving.alarmEnabled);
                     writer.WriteLine(saving.darkMode);
-                    //writer.WriteLine(saving.alarmTime);
+                    writer.WriteLine(saving.alarmTime);
                 }
             }
 
+            StreamReader sr = new StreamReader(_filePath);
+            saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
+            saving.darkMode = Convert.ToBoolean(sr.ReadLine());
+            saving.alarmTime = DateTime.Parse(sr.ReadLine());
 
-            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_filePath).First());
             if (saving.alarmEnabled == true)
             {
-                alarmEnabled.Text = "Budík je zapnutý";
+                alarmEnabled.Text = "Budík je nastavený na" + saving.alarmTime.ToString();
             }
             else
             {
