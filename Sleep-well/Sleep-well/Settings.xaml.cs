@@ -3,10 +3,9 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+//using Android.Media;
 
 namespace SleepWell
 {
@@ -21,6 +20,23 @@ namespace SleepWell
         DateTime _triggerTime;
         Saving saving = new Saving();
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+
+        //public string music = "ringtone.mp3";
+        //protected MediaPlayer player;
+        //public void StartPlayer(String filePath)
+        //{
+        //    if (player == null)
+        //    {
+        //        player = new MediaPlayer();
+        //    }
+        //    else
+        //    {
+        //        player.Reset();
+        //        player.SetDataSource(filePath);
+        //        player.Prepare();
+        //        player.Start();
+        //    }
+        //}
 
 
         public Settings()
@@ -43,9 +59,12 @@ namespace SleepWell
             BeforeAlarmPicker.SelectedIndex = 0;
 
 
-            saving.alarmEnabled = Convert.ToBoolean(File.ReadLines(_filePath).First());
-            saving.darkMode = Convert.ToBoolean(File.ReadLines(_filePath).Last());
-            //saving.alarmTime = DateTime.Parse(File.ReadLines(_filePath).Last());
+            StreamReader sr = new StreamReader(_filePath);
+            saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
+            saving.darkMode = Convert.ToBoolean(sr.ReadLine());
+            saving.alarmTime = DateTime.Parse(sr.ReadLine());
+            _timePicker.Time = saving.alarmTime;
+
 
             if (saving.alarmEnabled)
             {

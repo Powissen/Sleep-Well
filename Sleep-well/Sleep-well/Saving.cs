@@ -6,6 +6,6 @@ namespace SleepWell
     {
         public bool alarmEnabled;
         public bool darkMode;
-        //public DateTime alarmTime;
+        public DateTime alarmTime;
     }
 }
