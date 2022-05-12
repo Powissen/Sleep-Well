@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
-
+using System.IO;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 //using Android.Media;
@@ -10,12 +12,16 @@ namespace SleepWell
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
+
     public partial class Settings : ContentPage
     {
         public string textColour { get; set; } = "Black";
-
+        public string barColour { get; set; } = "LightGray";
         DateTime _triggerTime;
-        //public string music = "Nokia Ringtone Arabic 1 HOur.mp3";
+        Saving saving = new Saving();
+        string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+
+        //public string music = "ringtone.mp3";
         //protected MediaPlayer player;
         //public void StartPlayer(String filePath)
         //{
@@ -31,6 +37,8 @@ namespace SleepWell
         //        player.Start();
         //    }
         //}
+
+
         public Settings()
         {
             InitializeComponent();
@@ -38,6 +46,53 @@ namespace SleepWell
 
             BindingContext = this;
 
+            LanguagePicker.Items.Add("Slovenčina");
+            LanguagePicker.Items.Add("English");
+
+            BeforeAlarmPicker.Items.Add("5min");
+            BeforeAlarmPicker.Items.Add("10min");
+            BeforeAlarmPicker.Items.Add("15min");
+            BeforeAlarmPicker.Items.Add("20min");
+            BeforeAlarmPicker.Items.Add("25min");
+            BeforeAlarmPicker.Items.Add("30min");
+            BeforeAlarmPicker.SelectedIndex = 0;
+
+
+            StreamReader sr = new StreamReader(_filePath);
+            saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
+            saving.darkMode = Convert.ToBoolean(sr.ReadLine());
+            saving.alarmTime = DateTime.Parse(sr.ReadLine());
+            saving.language = Convert.ToInt32(sr.ReadLine());
+            sr.Close();
+
+
+            _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
+            LanguagePicker.SelectedIndex = saving.language;
+
+            if (saving.alarmEnabled)
+            {
+                _switch.IsToggled = true;
+                _triggerTime = saving.alarmTime;
+                savedTime.Text = saving.alarmTime.ToString();
+            }
+
+            if (saving.darkMode)
+            {
+                DarkModeCheckBox.IsChecked = true;
+            }
+
+        }
+
+        void SaveData()
+        {
+            StreamWriter writer = new StreamWriter(_filePath, false);
+            {
+                writer.WriteLine(saving.alarmEnabled);
+                writer.WriteLine(saving.darkMode);
+                writer.WriteLine(_timePicker.Time);
+                writer.WriteLine(saving.language);
+                writer.Close();
+            }
         }
 
         void OpenMainPage(object sender, EventArgs args)
@@ -47,15 +102,13 @@ namespace SleepWell
 
 
 
-
-
-
+       // ---------- Timer ----------
         bool OnTimerTick()
         {
             if (_switch.IsToggled && DateTime.Now >= _triggerTime)
             {
                 _switch.IsToggled = false;
-                DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
+                DisplayAlert("VSTAVAJ", "Poznámka:" + _entry.Text, "OK");
                 //StartPlayer("ringtone.mp3");
             }
             return true;
@@ -78,29 +131,66 @@ namespace SleepWell
         {
             if (_switch.IsToggled)
             {
+                saving.alarmEnabled = true;
+
                 _triggerTime = DateTime.Today + _timePicker.Time;
                 if (_triggerTime < DateTime.Now)
                 {
                     _triggerTime += TimeSpan.FromDays(1);
                 }
             }
+            else
+            {
+                saving.alarmEnabled = false;
+            }
+            SaveData();
         }
 
+        // -------------------------------------------------------------------------------------------
         private void CheckBox_DarkMode(object sender, CheckedChangedEventArgs e)
         {
 
             if (DarkModeCheckBox.IsChecked)
             {
-                BackgroundColor = Color.FromHex("171717");
-                textColour = "White";
+                BackgroundColor = Color.FromHex("1f1f1f");
+                textColour = "LightGray";
+                barColour = "Black";
                 OnPropertyChanged(nameof(textColour));
+                OnPropertyChanged(nameof(barColour));
+                saving.darkMode = true;
+                SaveData();
             }
             else
             {
                 BackgroundColor = Color.White;
                 textColour = "Black";
+                barColour = "DarkGray";
                 OnPropertyChanged(nameof(textColour));
+                OnPropertyChanged(nameof(barColour));
+                saving.darkMode = false;
+                SaveData();
             }
+        }
+        
+        //Link na multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
+
+        private void LanguageChange(object sender, EventArgs e)
+        {
+            if (LanguagePicker.SelectedIndex == 0)
+            {
+                Header_Description.Text = "Nastavenia";
+                saving.language = 0;
+            }
+            else
+            {
+                Header_Description.Text = "Settings";
+                saving.language = 1;
+            }
+            SaveData();
+        }
+        private void BeforeAlarmChange(object sender, EventArgs e)
+        {
+            //Zmena času povolenia zobudenia skôr
         }
     }
 }
