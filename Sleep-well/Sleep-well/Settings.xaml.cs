@@ -63,17 +63,15 @@ namespace SleepWell
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
+            //saving.alarmNote = sr.ReadLine();
             sr.Close();
 
-
-            _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
             LanguagePicker.SelectedIndex = saving.language;
 
             if (saving.alarmEnabled)
             {
                 _switch.IsToggled = true;
                 _triggerTime = saving.alarmTime;
-                savedTime.Text = saving.alarmTime.ToString();
             }
 
             if (saving.darkMode)
@@ -81,6 +79,12 @@ namespace SleepWell
                 DarkModeCheckBox.IsChecked = true;
             }
 
+            //if (saving.alarmNote != "")
+            //{
+            //    _entry.Text = saving.alarmNote;
+            //}
+
+            _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
         }
 
         void SaveData()
@@ -91,6 +95,7 @@ namespace SleepWell
                 writer.WriteLine(saving.darkMode);
                 writer.WriteLine(_timePicker.Time);
                 writer.WriteLine(saving.language);
+                //writer.WriteLine(saving.alarmNote);
                 writer.Close();
             }
         }
@@ -187,6 +192,11 @@ namespace SleepWell
                 saving.language = 1;
             }
             SaveData();
+        }
+        private void AlarmNoteChanged(object sender, EventArgs e)
+        {
+            //saving.alarmNote = _entry.Text;
+            //SaveData();
         }
         private void BeforeAlarmChange(object sender, EventArgs e)
         {

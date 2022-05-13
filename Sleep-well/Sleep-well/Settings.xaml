@@ -35,7 +35,7 @@
                     HorizontalOptions="Center"
                     PropertyChanged="OnTimePickerPropertyChanged" />
 
-            <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="LightGray" BackgroundColor="{Binding barColour}"/>
+            <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="LightGray" BackgroundColor="{Binding barColour}" PropertyChanged="AlarmNoteChanged"/>
         </StackLayout>
 
 
@@ -59,8 +59,6 @@
         </Grid>
         <Line Stroke="Black" X2="500" />
 
-
-        <Label x:Name="savedTime" Text="Budik je naozaj vypnuty" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="20"/>
 
 
         <!--App version-->

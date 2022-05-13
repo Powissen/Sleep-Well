@@ -40,6 +40,7 @@ namespace SleepWell
                 saving.darkMode = false;
                 saving.alarmTime = DateTime.Now;
                 saving.language = 0;
+                //saving.alarmNote = "";
 
                 using (StreamWriter writer = new StreamWriter(_filePath, false))
                 {
@@ -47,6 +48,7 @@ namespace SleepWell
                     writer.WriteLine(saving.darkMode);
                     writer.WriteLine(saving.alarmTime);
                     writer.WriteLine(saving.language);
+                    //writer.WriteLine("");
                     writer.Close();
                 }
             }
@@ -56,6 +58,7 @@ namespace SleepWell
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
+            //saving.alarmNote = sr.ReadLine();
             sr.Close();
 
             if (saving.alarmEnabled)

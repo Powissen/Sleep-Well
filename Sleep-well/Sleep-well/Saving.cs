@@ -8,5 +8,6 @@ namespace SleepWell
         public bool darkMode;
         public DateTime alarmTime;
         public int language;
+        //public string alarmNote;
     }
 }
