@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 //using Android.Media;
@@ -49,13 +47,13 @@ namespace SleepWell
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
 
-            BeforeAlarmPicker.Items.Add("5min");
-            BeforeAlarmPicker.Items.Add("10min");
-            BeforeAlarmPicker.Items.Add("15min");
-            BeforeAlarmPicker.Items.Add("20min");
-            BeforeAlarmPicker.Items.Add("25min");
-            BeforeAlarmPicker.Items.Add("30min");
-            BeforeAlarmPicker.SelectedIndex = 0;
+            //BeforeAlarmPicker.Items.Add("5min");
+            //BeforeAlarmPicker.Items.Add("10min");
+            //BeforeAlarmPicker.Items.Add("15min");
+            //BeforeAlarmPicker.Items.Add("20min");
+            //BeforeAlarmPicker.Items.Add("25min");
+            //BeforeAlarmPicker.Items.Add("30min");
+            //BeforeAlarmPicker.SelectedIndex = 0;
 
 
             StreamReader sr = new StreamReader(_filePath);
@@ -63,7 +61,7 @@ namespace SleepWell
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
-            //saving.alarmNote = sr.ReadLine();
+            saving.alarmNote = sr.ReadLine();
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
@@ -79,12 +77,12 @@ namespace SleepWell
                 DarkModeCheckBox.IsChecked = true;
             }
 
-            //if (saving.alarmNote != "")
-            //{
-            //    _entry.Text = saving.alarmNote;
-            //}
-
             _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
+
+            if (saving.alarmNote != "")
+            {
+                _entry.Text = saving.alarmNote;
+            }
         }
 
         void SaveData()
@@ -95,7 +93,7 @@ namespace SleepWell
                 writer.WriteLine(saving.darkMode);
                 writer.WriteLine(_timePicker.Time);
                 writer.WriteLine(saving.language);
-                //writer.WriteLine(saving.alarmNote);
+                writer.WriteLine(saving.alarmNote);
                 writer.Close();
             }
         }
@@ -193,14 +191,10 @@ namespace SleepWell
             }
             SaveData();
         }
-        private void AlarmNoteChanged(object sender, EventArgs e)
+        private void AlarmNoteSave(object sender, EventArgs e)
         {
-            //saving.alarmNote = _entry.Text;
-            //SaveData();
-        }
-        private void BeforeAlarmChange(object sender, EventArgs e)
-        {
-            //Zmena času povolenia zobudenia skôr
+            saving.alarmNote = _entry.Text;
+            SaveData();
         }
     }
 }

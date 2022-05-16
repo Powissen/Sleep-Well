@@ -8,10 +8,16 @@
     <StackLayout>
 
         <Grid>
-            <Frame BackgroundColor="LightGray" Padding="10" CornerRadius="0">
-                <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            <Frame x:Name="Header" BackgroundColor="LightGray" Padding="10" CornerRadius="0">
+                <Label x:Name="HeaderText" Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
             </Frame>
-            <Button Text="Nastavenia" Clicked="OpenSettings" FontSize="10" HorizontalOptions="End"/>
+            <ImageButton Source="settings_icon.png"
+                    HorizontalOptions="End"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="OpenSettings"
+                    WidthRequest="40"
+                    Padding="0, 0, 5, 0"
+                    BackgroundColor="Transparent"/>
         </Grid>
 
         <Label 
