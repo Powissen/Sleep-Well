@@ -16,6 +16,7 @@
                     VerticalOptions="CenterAndExpand"
                     Clicked="OpenMainPage"
                     WidthRequest="55"
+                    Padding="5, 0, 0, 0"  
                     BackgroundColor="Transparent"/>
         </Grid>
 
