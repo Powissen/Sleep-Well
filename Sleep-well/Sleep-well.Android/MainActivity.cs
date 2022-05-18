@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Plugin.LocalNotification;
 
 namespace SleepWell.Droid
 {
@@ -14,10 +15,17 @@ namespace SleepWell.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            NotificationCenter.CreateNotificationChannel();
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current; 
+            player.Load("ringtone.mp3"); 
+            player.Play();
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

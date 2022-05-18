@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotification;
 //using Android.Media;
 
 namespace SleepWell
@@ -110,9 +111,17 @@ namespace SleepWell
         {
             if (_switch.IsToggled && DateTime.Now >= _triggerTime)
             {
-                _switch.IsToggled = false;
-                DisplayAlert("VSTAVAJ", "Poznámka:" + _entry.Text, "OK");
-                //StartPlayer("ringtone.mp3");
+                //DisplayAlert("VSTAVAJ", "Poznámka:" + _entry.Text, "OK");
+
+                var notification = new NotificationRequest
+                {
+                    BadgeNumber = 1,
+                    Description = "VSTAVAJ HOVNO",
+                    Title = "vsataň ne?",
+                    NotificationId = 1337,
+                };
+
+                NotificationCenter.Current.Show(notification);
             }
             return true;
         }
@@ -167,7 +176,7 @@ namespace SleepWell
             {
                 BackgroundColor = Color.White;
                 textColour = "Black";
-                barColour = "DarkGray";
+                barColour = "LightGray";
                 OnPropertyChanged(nameof(textColour));
                 OnPropertyChanged(nameof(barColour));
                 saving.darkMode = false;

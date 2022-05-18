@@ -41,8 +41,9 @@
                     FontSize="30"
                     HorizontalOptions="Center"
                     PropertyChanged="OnTimePickerPropertyChanged" />
+            <Line Stroke="Black" X2="500" />
             <Grid>
-                <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="LightGray" BackgroundColor="{Binding barColour}" HorizontalOptions="Start"/>
+                <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="DarkGray" TextColor="{Binding textColour}" BackgroundColor="{Binding barColour}" HorizontalOptions="Start"/>
                 <Button Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End"/>
             </Grid>
 
