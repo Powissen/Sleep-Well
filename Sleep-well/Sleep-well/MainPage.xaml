@@ -8,8 +8,8 @@
     <StackLayout>
 
         <Grid>
-            <Frame x:Name="Header" BackgroundColor="Black" Padding="10" CornerRadius="0">
-                <Label x:Name="HeaderText" Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            <Frame BackgroundColor="Black" Padding="10" CornerRadius="0">
+                <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
             </Frame>
             <ImageButton Source="settings_icon.png"
                     HorizontalOptions="End"

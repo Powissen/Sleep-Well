@@ -16849,13 +16849,16 @@ namespace SleepWell.Droid
 			public const int settings_icon = 2131165327;
 			
 			// aapt resource value: 0x7F070090
-			public const int test_custom_background = 2131165328;
+			public const int SleepWellLogo = 2131165328;
 			
 			// aapt resource value: 0x7F070091
-			public const int tooltip_frame_dark = 2131165329;
+			public const int test_custom_background = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int tooltip_frame_light = 2131165330;
+			public const int tooltip_frame_dark = 2131165330;
+			
+			// aapt resource value: 0x7F070093
+			public const int tooltip_frame_light = 2131165331;
 			
 			static Drawable()
 			{
@@ -18975,16 +18978,13 @@ namespace SleepWell.Droid
 		{
 			
 			// aapt resource value: 0x7F0C0000
-			public const int background = 2131492864;
+			public const int icon = 2131492864;
 			
 			// aapt resource value: 0x7F0C0001
-			public const int icon = 2131492865;
+			public const int icon_round = 2131492865;
 			
 			// aapt resource value: 0x7F0C0002
-			public const int icon_round = 2131492866;
-			
-			// aapt resource value: 0x7F0C0003
-			public const int launcher_foreground = 2131492867;
+			public const int launcher_foreground = 2131492866;
 			
 			static Mipmap()
 			{

@@ -40,7 +40,7 @@ namespace SleepWell
                     alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
                 }
                 StopSleepButton.Text = "Stop sleep";
-                Warning.Text = "Please leave this screen opened and turn off the screen";
+                Warning.Text = "Please leave this window opened and turn off the screen";
             }
             else
             {

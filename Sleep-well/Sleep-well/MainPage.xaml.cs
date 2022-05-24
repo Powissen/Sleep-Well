@@ -76,12 +76,6 @@ namespace SleepWell
                     alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
                 }
             }
-
-            if (saving.darkMode)
-            {
-                Header.BackgroundColor = Color.FromHex("000000");
-                HeaderText.TextColor = Color.FromHex("ffffff");
-            }
         }
 
         void OpenSettings(object sender, EventArgs args)
