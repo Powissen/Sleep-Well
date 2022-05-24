@@ -6,16 +6,16 @@
              BackgroundColor="White">
 
     <StackLayout>
-            <!--Top menu-->
-            <Grid>
-            <Frame BackgroundColor="{Binding barColour}" Padding="10" CornerRadius="0">
-                <Label x:Name="Header_Description" Text="Nastavenia" HorizontalTextAlignment="Center" TextColor="{Binding textColour}" FontSize="20"/>
+        <!--Top menu-->
+        <Grid>
+            <Frame BackgroundColor="Orange" Padding="10" CornerRadius="0">
+                <Label x:Name="Header_Description" Text="Nastavenia" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
             </Frame>
             <ImageButton Source="back_arrow.png"
                     HorizontalOptions="Start"
                     VerticalOptions="CenterAndExpand"
                     Clicked="OpenMainPage"
-                    WidthRequest="55"
+                    WidthRequest="60"
                     Padding="5, 0, 0, 0"  
                     BackgroundColor="Transparent"/>
         </Grid>
@@ -23,18 +23,16 @@
 
 
         <!--Alarm-->
-            <StackLayout Orientation="Horizontal">
+        <!--<StackLayout Orientation="Horizontal">
             <Label Text="Povoliť budík:" TextColor="{Binding textColour}" VerticalOptions="Center"/>
                 <Switch x:Name="_switch"
                     HorizontalOptions="EndAndExpand"
                     Toggled="OnSwitchToggled" />
-            </StackLayout>
-
-        <Line Stroke="Black" X2="500" />
+            </StackLayout>-->
 
 
         <StackLayout>
-            <Label Text="Budík je nastavený na:" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="20"/>
+            <Label x:Name="TimerHeader"  Text="Budík je nastavený na:" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="20"/>
             <TimePicker x:Name="_timePicker"
                     Format="T"
                     TextColor="{Binding textColour}"
@@ -44,7 +42,7 @@
             <Line Stroke="Black" X2="500" />
             <Grid>
                 <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="DarkGray" TextColor="{Binding textColour}" BackgroundColor="{Binding barColour}" HorizontalOptions="Start"/>
-                <Button Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End"/>
+                <Button x:Name="SaveButton" Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End" CornerRadius="15"/>
             </Grid>
 
         </StackLayout>
@@ -54,22 +52,15 @@
 
         <!--Settings options-->
         <Line Stroke="Black" X2="500" />
-            <Grid>
-            <Label Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
-                <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
-            </Grid>
-        <Line Stroke="Black" X2="500" />
-            <Grid>
-            <Label Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
-            <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" />
+        <Grid>
+            <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
+            <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
         </Grid>
         <Line Stroke="Black" X2="500" />
-
-
-
-        <!--App version-->
-            <Label Text="Version 0.1" HorizontalOptions="Start" VerticalOptions="EndAndExpand" TextColor="DarkGray" FontSize="15" />
-
-        </StackLayout>
-        
+        <Grid>
+            <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
+            <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" WidthRequest="100" />
+        </Grid>
+        <Line Stroke="Black" X2="500" />
+    </StackLayout>
 </ContentPage>

@@ -41,24 +41,15 @@ namespace SleepWell
         public Settings()
         {
             InitializeComponent();
-            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
 
             BindingContext = this;
 
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
 
-            //BeforeAlarmPicker.Items.Add("5min");
-            //BeforeAlarmPicker.Items.Add("10min");
-            //BeforeAlarmPicker.Items.Add("15min");
-            //BeforeAlarmPicker.Items.Add("20min");
-            //BeforeAlarmPicker.Items.Add("25min");
-            //BeforeAlarmPicker.Items.Add("30min");
-            //BeforeAlarmPicker.SelectedIndex = 0;
 
 
             StreamReader sr = new StreamReader(_filePath);
-            saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
@@ -66,12 +57,6 @@ namespace SleepWell
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
-
-            if (saving.alarmEnabled)
-            {
-                _switch.IsToggled = true;
-                _triggerTime = saving.alarmTime;
-            }
 
             if (saving.darkMode)
             {
@@ -90,7 +75,6 @@ namespace SleepWell
         {
             StreamWriter writer = new StreamWriter(_filePath, false);
             {
-                writer.WriteLine(saving.alarmEnabled);
                 writer.WriteLine(saving.darkMode);
                 writer.WriteLine(_timePicker.Time);
                 writer.WriteLine(saving.language);
@@ -105,26 +89,6 @@ namespace SleepWell
         }
 
 
-
-       // ---------- Timer ----------
-        bool OnTimerTick()
-        {
-            if (_switch.IsToggled && DateTime.Now >= _triggerTime)
-            {
-                //DisplayAlert("VSTAVAJ", "Poznámka:" + _entry.Text, "OK");
-
-                var notification = new NotificationRequest
-                {
-                    BadgeNumber = 1,
-                    Description = "VSTAVAJ HOVNO",
-                    Title = "vsataň ne?",
-                    NotificationId = 1337,
-                };
-
-                NotificationCenter.Current.Show(notification);
-            }
-            return true;
-        }
 
         void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -141,19 +105,10 @@ namespace SleepWell
 
         void SetTriggerTime()
         {
-            if (_switch.IsToggled)
+            _triggerTime = DateTime.Today + _timePicker.Time;
+            if (_triggerTime < DateTime.Now)
             {
-                saving.alarmEnabled = true;
-
-                _triggerTime = DateTime.Today + _timePicker.Time;
-                if (_triggerTime < DateTime.Now)
-                {
-                    _triggerTime += TimeSpan.FromDays(1);
-                }
-            }
-            else
-            {
-                saving.alarmEnabled = false;
+                _triggerTime += TimeSpan.FromDays(1);
             }
             SaveData();
         }
@@ -191,11 +146,21 @@ namespace SleepWell
             if (LanguagePicker.SelectedIndex == 0)
             {
                 Header_Description.Text = "Nastavenia";
+                TimerHeader.Text = "Budík je nastavený na:";
+                _entry.Placeholder = "Tu nastavte poznámku";
+                SaveButton.Text = "ULOŽIŤ";
+                DarkModeText.Text = "Tmavý režim";
+                LanguageText.Text = "Jazyk";
                 saving.language = 0;
             }
             else
             {
                 Header_Description.Text = "Settings";
+                TimerHeader.Text = "The alarm is set to:";
+                _entry.Placeholder = "Set a note here";
+                SaveButton.Text = "SAVE";
+                DarkModeText.Text = "Dark mode";
+                LanguageText.Text = "Language";
                 saving.language = 1;
             }
             SaveData();
