@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepWell.WhenToSleep"
+             BackgroundColor="White">
+    
+    
+    <StackLayout>
+        <!--Top menu-->
+        <Grid>
+            <Frame BackgroundColor="Orange" Padding="10" CornerRadius="0">
+                <Label x:Name="Header" Text="Kedy ísť spať?" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            </Frame>
+            <ImageButton Source="back_arrow.png"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="OpenMainPage"
+                    WidthRequest="60"
+                    Padding="5, 0, 0, 0"  
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+        <Label x:Name="HeaderText" Text="Odporúčané časy na spánok vypočítané podľa spánkových cyklov" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" FontSize="20" Padding="0,20,0,15"/>
+
+        <Line Stroke="Black" X2="500" />
+
+        <Label x:Name="AlarmTime" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" Padding="0,15,0,0" FontSize="20"/>
+
+        <Grid Padding="10, 20, 10, 0">
+            <Frame BackgroundColor="DarkGreen" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="Start">
+                <Label x:Name="Time1" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+            <Frame BackgroundColor="Green" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="Center">
+                <Label x:Name="Time2" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+            <Frame BackgroundColor="IndianRed" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="End">
+                <Label x:Name="Time3" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+        </Grid>
+
+        <Grid Padding="10, 30, 10, 0">
+            <Frame BackgroundColor="IndianRed" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="Start">
+                <Label x:Name="Time4" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+            <Frame BackgroundColor="IndianRed" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="Center">
+                <Label x:Name="Time5" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+            <Frame BackgroundColor="Darkred" Padding="10" CornerRadius="0" HeightRequest="25" WidthRequest="70" HorizontalOptions="End">
+                <Label x:Name="Time6" Text="00:00" HorizontalTextAlignment="Center" FontSize="20"/>
+            </Frame>
+        </Grid>
+
+        <Label x:Name="Note" Text="*Aplikácia počíta s priemerným časom zaspatia (15minút)" TextColor="{Binding textColour}" HorizontalTextAlignment="Start" Padding="4, 10, 0, 20" FontSize="10"/>
+
+        <Line Stroke="Black" X2="500" />
+
+        <Label x:Name="Instructions" Padding="4, 20, 0, 0" TextColor="{Binding textColour}" FontSize="15"/>
+
+
+
+
+    </StackLayout>
+</ContentPage>

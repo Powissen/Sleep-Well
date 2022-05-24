@@ -21,9 +21,14 @@ namespace SleepWell.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current; 
-            player.Load("ringtone.mp3"); 
-            player.Play();
+            //var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current; 
+            //player.Load("ringtone.mp3"); 
+            //player.Play();
+        }
+
+        public static void TestVoid()
+        {
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

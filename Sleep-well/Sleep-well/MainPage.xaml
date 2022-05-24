@@ -8,7 +8,7 @@
     <StackLayout>
 
         <Grid>
-            <Frame x:Name="Header" BackgroundColor="LightGray" Padding="10" CornerRadius="0">
+            <Frame x:Name="Header" BackgroundColor="Black" Padding="10" CornerRadius="0">
                 <Label x:Name="HeaderText" Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
             </Frame>
             <ImageButton Source="settings_icon.png"
@@ -20,6 +20,7 @@
                     BackgroundColor="Transparent"/>
         </Grid>
 
+
         <Label 
             x:Name="time"
             Text="{Binding Time}" 
@@ -29,9 +30,11 @@
             Padding="0,60,0,0"/>
 
 
-        <Label x:Name="alarmEnabled" Text="Budík je vypnutý" HorizontalTextAlignment="Center" TextColor="White" Padding="0,70,0,0" FontSize="20"/>
+        <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23"/>
+        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" Margin="0, 150, 0, 0"/>
+        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" VerticalOptions="EndAndExpand" Margin="0, 00, 0, 10"/>
 
-        <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,100,00,0" FontSize="20"/>
+        <!-- <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,100,00,0" FontSize="20"/>
         <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,5,0,0" FontSize="20"/>
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,70,0,0" Spacing="50">
@@ -43,6 +46,6 @@
                BorderWidth="1"
                     Clicked="o0"/>
 
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
 </ContentPage>

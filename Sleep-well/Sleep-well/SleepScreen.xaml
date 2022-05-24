@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepWell.SleepScreen"
+             BackgroundImageSource="background.jpg">
+
+
+    <StackLayout>
+        <!--Top menu-->
+        <Grid>
+            <Frame BackgroundColor="Orange" Padding="10" CornerRadius="0">
+                <Label x:Name="Header" Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            </Frame>
+            <ImageButton Source="back_arrow.png"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="OpenMainPage"
+                    WidthRequest="60"
+                    Padding="5, 0, 0, 0"  
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+
+        <Label 
+            x:Name="time"
+            Text="{Binding Time}" 
+            HorizontalOptions="Center" 
+            FontSize="80"
+            TextColor="White"
+            Padding="0,60,0,0"/>
+
+
+        <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" FontSize="20" Padding="0, 200, 0, 0"/>
+        <Label x:Name="alarmAfter" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+        <Button x:Name="StopSleepButton" Text="Ukončiť spánok" BackgroundColor="Orange" Clicked="OpenMainPage" HorizontalOptions="Center" VerticalOptions="EndAndExpand" WidthRequest="300" HeightRequest="40" Margin="0, 0, 0, 50"/>
+        <Label x:Name="Warning" Text="Nechajte prosím túto obrazovku otvorenú a vypnite obrazovku" HorizontalOptions="Center" FontSize="11"/>
+
+
+    </StackLayout>
+</ContentPage>
