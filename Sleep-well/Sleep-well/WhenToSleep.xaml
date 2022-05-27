@@ -18,6 +18,13 @@
                     WidthRequest="60"
                     Padding="5, 0, 0, 0"  
                     BackgroundColor="Transparent"/>
+            <ImageButton Source="info.png"
+                    HorizontalOptions="End"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="TipsForSleep"
+                    WidthRequest="50"
+                    Padding="5, 0, 0, 0"  
+                    BackgroundColor="Transparent"/>
         </Grid>
 
         <Label x:Name="HeaderText" Text="Odporúčané časy na spánok vypočítané podľa spánkových cyklov" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" FontSize="20" Padding="0,20,0,15"/>
@@ -67,14 +74,5 @@
             <Frame BackgroundColor="DarkRed" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
             <Label Text="Nevhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
         </Grid>
-
-
-        <ImageButton Source="back_arrow.png"
-                    HorizontalOptions="Start"
-                    VerticalOptions="CenterAndExpand"
-                    Clicked="TipsForSleep"
-                    WidthRequest="60"
-                    Padding="5, 0, 0, 0"  
-                    BackgroundColor="Transparent"/>
-    </StackLayout>
+        </StackLayout>
 </ContentPage>
