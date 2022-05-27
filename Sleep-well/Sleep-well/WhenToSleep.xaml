@@ -23,7 +23,7 @@
                     VerticalOptions="CenterAndExpand"
                     Clicked="TipsForSleep"
                     WidthRequest="50"
-                    Padding="5, 0, 0, 0"  
+                    Padding="5, 0, 5, 0"  
                     BackgroundColor="Transparent"/>
         </Grid>
 

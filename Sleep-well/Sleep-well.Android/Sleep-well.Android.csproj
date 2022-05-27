@@ -132,7 +132,7 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SleepWellLogo%281024%29.png" />
+    <AndroidResource Include="Resources\drawable\SleepWellLogo1024.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\SleepWellLogo.png" />
