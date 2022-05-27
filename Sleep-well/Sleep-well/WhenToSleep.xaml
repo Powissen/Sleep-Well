@@ -51,13 +51,30 @@
         </Grid>
 
         <Label x:Name="Note" Text="*Aplikácia počíta s priemerným časom zaspatia (15minút)" TextColor="{Binding textColour}" HorizontalTextAlignment="Start" Padding="4, 10, 0, 20" FontSize="10"/>
+        <Grid>
+            <Frame BackgroundColor="DarkGreen" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
+            <Label Text="Najvhodnejší čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+        </Grid>
+        <Grid>
+            <Frame BackgroundColor="Green" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
+            <Label Text="Vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+        </Grid>
+        <Grid>
+            <Frame BackgroundColor="IndianRed" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
+            <Label Text="Menej vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+        </Grid>
+        <Grid>
+            <Frame BackgroundColor="DarkRed" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
+            <Label Text="Nevhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+        </Grid>
 
-        <Line Stroke="Black" X2="500" />
 
-        <Label x:Name="Instructions" Padding="4, 20, 0, 0" TextColor="{Binding textColour}" FontSize="15"/>
-
-
-
-
+        <ImageButton Source="back_arrow.png"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="TipsForSleep"
+                    WidthRequest="60"
+                    Padding="5, 0, 0, 0"  
+                    BackgroundColor="Transparent"/>
     </StackLayout>
 </ContentPage>

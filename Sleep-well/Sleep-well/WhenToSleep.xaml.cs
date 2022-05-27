@@ -35,29 +35,6 @@ namespace SleepWell
             }
 
 
-            if (saving.language == 1)
-            {
-                Header.Text = "When to go to bed?";
-                HeaderText.Text = "Recommended sleep times calculated based on sleep cycles";
-                Note.Text = "*The application calculates with an average time to fall asleep (15 minutes)";
-                Instructions.Text = "What to do for a good sleep? \n\n" +
-                    "• Don't use the phone at bedtime \n" +
-                    "• Observe the regular sleep time \n" +
-                    "• Don't perform physical activity before bedtime \n" +
-                    "• Don't go to bed with a full stomach \n" +
-                    "• Ventilate the room before going to bed \n";
-            }
-            else
-            {
-                    Instructions.Text = "Čo robiť pre dobrý spánok? \n\n" +
-                    "• Nepoužívať pred spaním mobil \n" +
-                    "• Dodržiavať pravidený čas zaspatia \n" +
-                    "• Nevykonávať pred spánkom fyzickú aktivitu \n" +
-                    "• Nechodiť do postele s plným bruchom \n" +
-                    "• Vyvetrať miestnosť pred spánkom \n";
-            }
-
-
             if (saving.alarmTime.Minute < 10)
             {
                 alarmTime = saving.alarmTime.Hour + ":" + saving.alarmTime.Minute + "0".ToString();
@@ -137,6 +114,20 @@ namespace SleepWell
                 Time1.Text = time1.Hour + ":" + time1.Minute.ToString();
             }
         }
+
+
+        void TipsForSleep(object sender, EventArgs args)
+        {   
+            if (saving.language == 1)
+            {
+                DisplayAlert("What to do for a good sleep? \n\n", "• Don't use the phone at bedtime \n• Observe the regular sleep time \n• Don't perform physical activity before bedtime \n• Don't go to bed with a full stomach \n• Ventilate the room before going to bed \n", "OK");
+            }
+            else
+            {
+                DisplayAlert("Čo robiť pre dobrý spánok? \n\n", "• Nepoužívať pred spaním mobil \n• Dodržiavať pravidený čas zaspatia \n• Nevykonávať pred spánkom fyzickú aktivitu \n• Nechodiť do postele s plným bruchom \n• Vyvetrať miestnosť pred spánkom", "OK");
+            }
+        }
+
 
         void OpenMainPage(object sender, EventArgs args)
         {
