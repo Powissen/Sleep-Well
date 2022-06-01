@@ -101,21 +101,14 @@ namespace SleepWell
                 if (!alert)
                 {
                     alert = true;
-                    if (saving.language == 1)
-                    {
-                        DisplayAlert("Good morning :-)", "Note: " + saving.alarmNote, "OK");
-                    }
-                    else
-                    {
-                        DisplayAlert("Dobré ráno :-)", "Poznámka: " + saving.alarmNote, "OK");
-                    }
+                    showPopup();
                 }
 
                 var notification = new NotificationRequest
                 {
                     BadgeNumber = 1,
                     Title = "Good morning :-)",
-                    Description = "The alarm was turned on, hope you feel fresh",
+                    Description = "The alarm was turned on, hope you feel fresh.",
                     NotificationId = 1337,
 
                 };
@@ -123,6 +116,40 @@ namespace SleepWell
                 NotificationCenter.Current.Show(notification);
             }
             return true;
+        }
+
+        public async void showPopup()
+        {
+            if (saving.language == 1)
+            {
+                var result = await DisplayAlert("Good morning :-)", "Note: " + saving.alarmNote, "Add 5 minutes", "Turn off alarm");
+                if (result)
+                {
+                    saving.alarmTime = saving.alarmTime.AddMinutes(5);
+                    alert = false;
+                }
+                else
+                {
+                    App.Current.MainPage = new MainPage();
+                    alert = false;
+                    sleeping = false;
+                }
+            }
+            else
+            {
+                var result = await DisplayAlert("Dobré ráno :-)", "Poznámka: " + saving.alarmNote, "Posunúť o 5 minút", "Vypnúť budík");
+                if (result)
+                {
+                    saving.alarmTime = saving.alarmTime.AddMinutes(5);
+                    alert = false;
+                }
+                else
+                {
+                    alert = false;
+                    sleeping = false;
+                    App.Current.MainPage = new MainPage();
+                }
+            }
         }
 
         void OpenMainPage(object sender, EventArgs args)

@@ -46,7 +46,14 @@ namespace SleepWell
 
             if (saving.language == 1)
             {
+                Header.Text = "When to go to bed?";
+                HeaderText.Text = "Recommended sleep times calculated based on sleep cycles";
                 AlarmTime.Text = "The alarm is set to:\n" + alarmTime;
+                Note.Text = "*App calculates with the average time to fall asleep (15minutes)";
+                Explanation1.Text = "Best time to sleep";
+                Explanation2.Text = "Good time to sleep";
+                Explanation3.Text = "Less suitable time to sleep";
+                Explanation4.Text = "Unsuitable time to sleep";
             }
             else
             {
