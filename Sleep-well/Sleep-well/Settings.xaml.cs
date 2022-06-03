@@ -3,8 +3,6 @@ using System.ComponentModel;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Plugin.LocalNotification;
-//using Android.Media;
 
 namespace SleepWell
 {
@@ -20,22 +18,6 @@ namespace SleepWell
         Saving saving = new Saving();
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
 
-        //public string music = "ringtone.mp3";
-        //protected MediaPlayer player;
-        //public void StartPlayer(String filePath)
-        //{
-        //    if (player == null)
-        //    {
-        //        player = new MediaPlayer();
-        //    }
-        //    else
-        //    {
-        //        player.Reset();
-        //        player.SetDataSource(filePath);
-        //        player.Prepare();
-        //        player.Start();
-        //    }
-        //}
 
 
         public Settings()
