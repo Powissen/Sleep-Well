@@ -60,19 +60,19 @@
         <Label x:Name="Note" Text="*Aplikácia počíta s priemerným časom zaspatia (15minút)" TextColor="{Binding textColour}" HorizontalTextAlignment="Start" Padding="4, 10, 0, 20" FontSize="10"/>
         <Grid>
             <Frame BackgroundColor="DarkGreen" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
-            <Label x:Name="Explanation1" Text="Najvhodnejší čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+            <Label x:Name="Explanation1" Text="Najvhodnejší čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12" TextColor="{Binding textColour}"/>
         </Grid>
         <Grid>
             <Frame BackgroundColor="Green" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
-            <Label x:Name="Explanation2" Text="Vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+            <Label x:Name="Explanation2" Text="Vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12" TextColor="{Binding textColour}"/>
         </Grid>
         <Grid>
             <Frame BackgroundColor="IndianRed" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
-            <Label x:Name="Explanation3" Text="Menej vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+            <Label x:Name="Explanation3" Text="Menej vhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12" TextColor="{Binding textColour}"/>
         </Grid>
         <Grid>
             <Frame BackgroundColor="DarkRed" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" />
-            <Label x:Name="Explanation4" Text="Nevhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12"/>
+            <Label x:Name="Explanation4" Text="Nevhodný čas na spánok" Margin="30, 0, 0, 0" VerticalOptions="Center" FontSize="12" TextColor="{Binding textColour}"/>
         </Grid>
         </StackLayout>
 </ContentPage>
