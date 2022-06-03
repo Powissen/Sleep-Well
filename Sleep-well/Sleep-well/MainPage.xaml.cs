@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Collections;
 using Xamarin.Forms;
+using Plugin.SharedTransitions;
 
 namespace SleepWell
 {
@@ -78,9 +79,10 @@ namespace SleepWell
             }
         }
 
-        void OpenSettings(object sender, EventArgs args)
+        async void OpenSettings(object sender, EventArgs args)
         {
             App.Current.MainPage = new Settings();
+
         }
         void OpenWhenToSleep(object sender, EventArgs args)
         {

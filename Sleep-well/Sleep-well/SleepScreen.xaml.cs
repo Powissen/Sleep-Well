@@ -1,5 +1,6 @@
 ﻿
 using Plugin.LocalNotification;
+using Plugin.SimpleAudioPlayer;
 using System;
 using System.IO;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace SleepWell
         Saving saving = new Saving();
         public string Time { get; set; } = "";
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+        ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
 
         public SleepScreen()
         {
@@ -22,6 +24,7 @@ namespace SleepWell
             sleeping = true;
             alert = false;
             BindingContext = this;
+            player.Load("ringtone.mp3");
 
             StreamReader sr = new StreamReader(_filePath);
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
@@ -102,18 +105,20 @@ namespace SleepWell
                 {
                     alert = true;
                     showPopup();
+
+                    player.Play();
                 }
 
-                var notification = new NotificationRequest
-                {
-                    BadgeNumber = 1,
-                    Title = "Good morning :-)",
-                    Description = "The alarm was turned on, hope you feel fresh.",
-                    NotificationId = 1337,
+                //var notification = new NotificationRequest
+                //{
+                //    BadgeNumber = 1,
+                //    Title = "Good morning :-)",
+                //    Description = "The alarm was turned on, hope you feel fresh.",
+                //    NotificationId = 1337,
 
-                };
+                //};
 
-                NotificationCenter.Current.Show(notification);
+                //NotificationCenter.Current.Show(notification);
             }
             return true;
         }
@@ -127,12 +132,14 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     alert = false;
+                    player.Stop();
                 }
                 else
                 {
                     App.Current.MainPage = new MainPage();
                     alert = false;
                     sleeping = false;
+                    player.Stop();
                 }
             }
             else
@@ -142,11 +149,13 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     alert = false;
+                    player.Stop();
                 }
                 else
                 {
                     alert = false;
                     sleeping = false;
+                    player.Stop();
                     App.Current.MainPage = new MainPage();
                 }
             }
