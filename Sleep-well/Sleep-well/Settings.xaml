@@ -54,13 +54,26 @@
         <!--Settings options-->
         <Line Stroke="Black" X2="500" />
         <Grid>
-            <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
+            <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
         </Grid>
         <Line Stroke="Black" X2="500" />
         <Grid>
-            <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" />
+            <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" WidthRequest="100" />
+        </Grid>
+        <Line Stroke="Black" X2="500" />
+        <Grid>
+            <Label x:Name="SoundText" Text="Zvuk budíka" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
+            <Picker x:Name="SoundPicker" TextColor="{Binding textColour}" SelectedIndexChanged="SoundChange" HorizontalOptions="End" WidthRequest="100" />
+            <ImageButton x:Name="SoundButton"
+                    Source="muted.png"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Clicked="PlaySoundButton"
+                    WidthRequest="30"
+                    Margin="0, 0, 120, 0"  
+                    BackgroundColor="Transparent"/>
         </Grid>
         <Line Stroke="Black" X2="500" />
     </StackLayout>

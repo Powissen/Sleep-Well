@@ -32,8 +32,8 @@
 
 
         <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23"/>
-        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" Margin="0, 150, 0, 0"/>
-        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 00, 0, 10"/>
+        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 35"/>
+        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 10"/>
 
         <!-- <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,100,00,0" FontSize="20"/>
         <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,5,0,0" FontSize="20"/>

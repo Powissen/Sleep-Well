@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Plugin.SimpleAudioPlayer;
+using System;
+using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using Xamarin.Forms;
@@ -17,6 +19,7 @@ namespace SleepWell
         DateTime _triggerTime;
         Saving saving = new Saving();
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
+        ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
 
 
 
@@ -29,6 +32,12 @@ namespace SleepWell
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
 
+            SoundPicker.Items.Add("Klasický");
+            SoundPicker.Items.Add("Príroda");
+            SoundPicker.Items.Add("Hudba");
+            SoundPicker.Items.Add("Gitara");
+
+
 
 
             StreamReader sr = new StreamReader(_filePath);
@@ -36,9 +45,11 @@ namespace SleepWell
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
+            saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
+            SoundPicker.SelectedIndex = saving.alarmSound;
 
             if (saving.darkMode)
             {
@@ -61,13 +72,9 @@ namespace SleepWell
                 writer.WriteLine(_timePicker.Time);
                 writer.WriteLine(saving.language);
                 writer.WriteLine(saving.alarmNote);
+                writer.WriteLine(saving.alarmSound);
                 writer.Close();
             }
-        }
-
-        void OpenMainPage(object sender, EventArgs args)
-        {
-            App.Current.MainPage = new MainPage();
         }
 
 
@@ -147,10 +154,59 @@ namespace SleepWell
             }
             SaveData();
         }
+
+        private void SoundChange(object sender, EventArgs e)
+        {
+            switch (SoundPicker.SelectedIndex)
+            {
+                case 0:
+                    saving.alarmSound = 0;
+                    player.Load("Classic.mp3");
+                    break;
+                case 1:
+                    saving.alarmSound = 1;
+                    player.Load("Nature.mp3");
+                    break;
+                case 2:
+                    saving.alarmSound = 2;
+                    player.Load("ChillMusic.mp3");
+                    break;
+                case 3:
+                    saving.alarmSound = 3;
+                    player.Load("Guitar.mp3");
+                    break;
+
+            }
+            SoundButton.Source = "muted.png";
+            SaveData();
+        }
+        private void PlaySoundButton(object sender, EventArgs e)
+        {
+            if (player.IsPlaying)
+            {
+                SoundButton.Source = "muted.png";
+                player.Stop();
+            }
+            else
+            {
+                SoundButton.Source = "unmuted.png";
+                player.Play();
+                player.Loop = true;
+            }
+        }
+
+
         private void AlarmNoteSave(object sender, EventArgs e)
         {
             saving.alarmNote = _entry.Text;
             SaveData();
+        }
+
+
+        void OpenMainPage(object sender, EventArgs args)
+        {
+            player.Stop();
+            App.Current.MainPage = new MainPage();
         }
     }
 }

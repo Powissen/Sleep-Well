@@ -93,9 +93,6 @@
     <Folder Include="Resources\Music\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\ringtone.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\settings_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +139,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\ChillMusic.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Nature.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Guitar.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Classic.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\unmuted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\muted.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

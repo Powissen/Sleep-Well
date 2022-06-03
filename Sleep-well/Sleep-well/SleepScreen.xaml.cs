@@ -3,6 +3,7 @@ using Plugin.LocalNotification;
 using Plugin.SimpleAudioPlayer;
 using System;
 using System.IO;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,25 +13,25 @@ namespace SleepWell
     public partial class SleepScreen : ContentPage
     {
         private bool sleeping;
-        private bool alert;
         Saving saving = new Saving();
         public string Time { get; set; } = "";
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
+        public DateTime TimeWhenTimerEnabled;
 
         public SleepScreen()
         {
             InitializeComponent();
             sleeping = true;
-            alert = false;
             BindingContext = this;
-            player.Load("ringtone.mp3");
+            TimeWhenTimerEnabled = DateTime.Now;
 
             StreamReader sr = new StreamReader(_filePath);
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
+            saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             sr.Close();
             if (saving.language == 1)
             {
@@ -57,6 +58,22 @@ namespace SleepWell
                 }
             }
 
+            switch (saving.alarmSound)
+            {
+                case 0:
+                    player.Load("Classic.mp3");
+                    break;
+                case 1:
+                    player.Load("Nature.mp3");
+                    break;
+                case 2:
+                    player.Load("ChillMusic.mp3");
+                    break;
+                case 3:
+                    player.Load("Guitar.mp3");
+                    break;
+            }
+
             while (saving.alarmTime <= DateTime.Now)
             {
                 saving.alarmTime = saving.alarmTime.AddDays(1);
@@ -69,6 +86,7 @@ namespace SleepWell
                 writer.WriteLine(saving.alarmTime);
                 writer.WriteLine(saving.language);
                 writer.WriteLine(saving.alarmNote);
+                writer.WriteLine(saving.alarmSound);
                 writer.Close();
             }
             OnTimerTick();
@@ -101,24 +119,23 @@ namespace SleepWell
 
             if (DateTime.Now >= saving.alarmTime && sleeping)
             {
-                if (!alert)
+                Vibration.Vibrate();
+
+                if (!player.IsPlaying)
                 {
-                    alert = true;
+                    player.Play();
                     showPopup();
 
-                    player.Play();
+                    var notification = new NotificationRequest
+                    {
+                        BadgeNumber = 1,
+                        Title = "Good morning :-)",
+                        Description = "The alarm was turned on, hope you feel fresh.",
+                        NotificationId = 1337,
+
+                    };
+                    NotificationCenter.Current.Show(notification);
                 }
-
-                //var notification = new NotificationRequest
-                //{
-                //    BadgeNumber = 1,
-                //    Title = "Good morning :-)",
-                //    Description = "The alarm was turned on, hope you feel fresh.",
-                //    NotificationId = 1337,
-
-                //};
-
-                //NotificationCenter.Current.Show(notification);
             }
             return true;
         }
@@ -131,13 +148,11 @@ namespace SleepWell
                 if (result)
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
-                    alert = false;
                     player.Stop();
                 }
                 else
                 {
                     App.Current.MainPage = new MainPage();
-                    alert = false;
                     sleeping = false;
                     player.Stop();
                 }
@@ -148,21 +163,31 @@ namespace SleepWell
                 if (result)
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
-                    alert = false;
                     player.Stop();
                 }
                 else
                 {
-                    alert = false;
-                    sleeping = false;
                     player.Stop();
-                    App.Current.MainPage = new MainPage();
+                    OpenMainPage();
                 }
             }
         }
 
-        void OpenMainPage(object sender, EventArgs args)
+        public void OpenMainPageButton(object sender, EventArgs args)
         {
+            OpenMainPage();
+        }
+        void OpenMainPage()
+        {
+            TimeSpan sleepLength = DateTime.Now.Subtract(TimeWhenTimerEnabled);
+            if (saving.language == 1)
+            {
+                DisplayAlert("Sleep length:", sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s ".ToString(), "OK");
+            }
+            else
+            {
+                DisplayAlert("Dĺžka spánku:", sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s ".ToString(), "OK");
+            }
             App.Current.MainPage = new MainPage();
             sleeping = false;
         }
