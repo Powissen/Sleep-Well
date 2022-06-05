@@ -37,7 +37,7 @@ namespace SleepWell
 
             if (saving.alarmTime.Minute < 10)
             {
-                alarmTime = saving.alarmTime.Hour + ":" + saving.alarmTime.Minute + "0".ToString();
+                alarmTime = saving.alarmTime.Hour + ":" + "0" + saving.alarmTime.Minute.ToString();
             }
             else
             {
@@ -64,7 +64,7 @@ namespace SleepWell
             DateTime time6 = saving.alarmTime.AddMinutes(-90 - 15);
             if (time6.Minute < 10)
             {
-                Time6.Text = time6.Hour + ":" + time6.Minute + "0".ToString();
+                Time6.Text = time6.Hour + ":" + "0" + time6.Minute.ToString();
             }
             else
             {
@@ -74,7 +74,7 @@ namespace SleepWell
             DateTime time5 = saving.alarmTime.AddMinutes(-180 - 15);
             if (time5.Minute < 10)
             {
-                Time5.Text = time5.Hour + ":" + time5.Minute + "0".ToString();
+                Time5.Text = time5.Hour + ":" + "0" + time5.Minute.ToString();
             }
             else
             {
@@ -84,7 +84,7 @@ namespace SleepWell
             DateTime time4 = saving.alarmTime.AddMinutes(-270 - 15);
             if (time4.Minute < 10)
             {
-                Time4.Text = time4.Hour + ":" + time4.Minute + "0".ToString();
+                Time4.Text = time4.Hour + ":" + "0" + time4.Minute.ToString();
             }
             else
             {
@@ -94,7 +94,7 @@ namespace SleepWell
             DateTime time3 = saving.alarmTime.AddMinutes(-360 - 15);
             if (time3.Minute < 10)
             {
-                Time3.Text = time3.Hour + ":" + time3.Minute + "0".ToString();
+                Time3.Text = time3.Hour + ":" + "0" + time3.Minute.ToString();
             }
             else
             {
@@ -104,7 +104,7 @@ namespace SleepWell
             DateTime time2 = saving.alarmTime.AddMinutes(-450 - 15);
             if (time2.Minute < 10)
             {
-                Time2.Text = time2.Hour + ":" + time2.Minute + "0".ToString();
+                Time2.Text = time2.Hour + ":" + "0" + time2.Minute.ToString();
             }
             else
             {
@@ -114,7 +114,7 @@ namespace SleepWell
             DateTime time1 = saving.alarmTime.AddMinutes(-540 - 15);
             if (time1.Minute < 10)
             {
-                Time1.Text = time1.Hour + ":" + time1.Minute + "0".ToString();
+                Time1.Text = time1.Hour + ":" + "0" + time1.Minute.ToString();
             }
             else
             {
