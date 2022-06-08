@@ -18,11 +18,13 @@ namespace SleepWell
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
         public DateTime TimeWhenTimerEnabled;
+        private bool popupShowed;
 
         public SleepScreen()
         {
             InitializeComponent();
             sleeping = true;
+            popupShowed = false;
             BindingContext = this;
             TimeWhenTimerEnabled = DateTime.Now;
 
@@ -121,9 +123,11 @@ namespace SleepWell
             {
                 Vibration.Vibrate();
 
-                if (!player.IsPlaying)
+                if (!popupShowed)
                 {
+                    popupShowed = true;
                     player.Play();
+                    player.Loop = true;
                     showPopup();
 
                     var notification = new NotificationRequest
@@ -173,23 +177,34 @@ namespace SleepWell
             }
         }
 
-        public void OpenMainPageButton(object sender, EventArgs args)
-        {
-            OpenMainPage();
-        }
         void OpenMainPage()
         {
             TimeSpan sleepLength = DateTime.Now.Subtract(TimeWhenTimerEnabled);
+
+            float sleepCycles = sleepLength.Minutes + sleepLength.Hours * 60;
+            if (sleepCycles > 15)
+            {
+                sleepCycles -= 15;
+            }
+            sleepCycles /= 90;
+            sleepCycles = (float)Math.Floor(sleepCycles);
+
+
             if (saving.language == 1)
             {
-                DisplayAlert("Sleep length:", sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s ".ToString(), "OK");
+                DisplayAlert("Sleep summary:", "Sleep length: " + sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s \n" + "Sleep cycles: " + sleepCycles.ToString(), "OK");
             }
             else
             {
-                DisplayAlert("Dĺžka spánku:", sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s ".ToString(), "OK");
+                DisplayAlert("Zhrnutie spánku:", "Dĺžka spánku: " + sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s \n" + "Spánkových cyklov: " + sleepCycles.ToString(), "OK");
             }
             App.Current.MainPage = new MainPage();
             sleeping = false;
+        }
+
+        public void OpenMainPageButton(object sender, EventArgs args)
+        {
+            OpenMainPage();
         }
     }
 }

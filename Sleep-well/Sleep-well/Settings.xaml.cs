@@ -32,11 +32,6 @@ namespace SleepWell
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
 
-            SoundPicker.Items.Add("Klasický");
-            SoundPicker.Items.Add("Príroda");
-            SoundPicker.Items.Add("Hudba");
-            SoundPicker.Items.Add("Gitara");
-
 
 
 
@@ -50,6 +45,7 @@ namespace SleepWell
 
             LanguagePicker.SelectedIndex = saving.language;
             SoundPicker.SelectedIndex = saving.alarmSound;
+
 
             if (saving.darkMode)
             {
@@ -140,6 +136,13 @@ namespace SleepWell
                 SaveButton.Text = "ULOŽIŤ";
                 DarkModeText.Text = "Tmavý režim";
                 LanguageText.Text = "Jazyk";
+                SoundText.Text = "Zvuk budíka";
+                SoundPicker.Items.Clear();
+                SoundPicker.Items.Add("Klasický");
+                SoundPicker.Items.Add("Príroda");
+                SoundPicker.Items.Add("Hudba");
+                SoundPicker.Items.Add("Gitara");
+                SoundPicker.SelectedIndex = saving.alarmSound;
                 saving.language = 0;
             }
             else
@@ -150,6 +153,13 @@ namespace SleepWell
                 SaveButton.Text = "SAVE";
                 DarkModeText.Text = "Dark mode";
                 LanguageText.Text = "Language";
+                SoundText.Text = "Alarm sound";
+                SoundPicker.Items.Clear();
+                SoundPicker.Items.Add("Classic");
+                SoundPicker.Items.Add("Nature");
+                SoundPicker.Items.Add("Music");
+                SoundPicker.Items.Add("Guitar");
+                SoundPicker.SelectedIndex = saving.alarmSound;
                 saving.language = 1;
             }
             SaveData();
