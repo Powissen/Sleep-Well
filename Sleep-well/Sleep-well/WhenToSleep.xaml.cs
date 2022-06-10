@@ -25,6 +25,8 @@ namespace SleepWell
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
+            saving.alarmSound = Convert.ToInt32(sr.ReadLine());
+            saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             sr.Close();
 
             if (saving.darkMode)
@@ -49,7 +51,7 @@ namespace SleepWell
                 Header.Text = "When to go to bed?";
                 HeaderText.Text = "Recommended sleep times calculated based on sleep cycles";
                 AlarmTime.Text = "The alarm is set to:\n" + alarmTime;
-                Note.Text = "*App calculates with the average time to fall asleep (15minutes)";
+                Note.Text = "*App calculates with the set time to fall asleep (" + saving.fallAsleepTime + "m)";
                 Explanation1.Text = "Best time to sleep";
                 Explanation2.Text = "Good time to sleep";
                 Explanation3.Text = "Less suitable time to sleep";
@@ -57,11 +59,12 @@ namespace SleepWell
             }
             else
             {
+                Note.Text = "*Aplikácia počíta s nastaveným časom zaspatia (" + saving.fallAsleepTime + "m)";
                 AlarmTime.Text = "Budík je nastavený na:\n" + alarmTime;
             }
 
 
-            DateTime time6 = saving.alarmTime.AddMinutes(-90 - 15);
+            DateTime time6 = saving.alarmTime.AddMinutes(-90 - saving.fallAsleepTime);
             if (time6.Minute < 10)
             {
                 Time6.Text = time6.Hour + ":" + "0" + time6.Minute.ToString();
@@ -71,7 +74,7 @@ namespace SleepWell
                 Time6.Text = time6.Hour + ":" + time6.Minute.ToString();
             }
 
-            DateTime time5 = saving.alarmTime.AddMinutes(-180 - 15);
+            DateTime time5 = saving.alarmTime.AddMinutes(-180 - saving.fallAsleepTime);
             if (time5.Minute < 10)
             {
                 Time5.Text = time5.Hour + ":" + "0" + time5.Minute.ToString();
@@ -81,7 +84,7 @@ namespace SleepWell
                 Time5.Text = time5.Hour + ":" + time5.Minute.ToString();
             }
 
-            DateTime time4 = saving.alarmTime.AddMinutes(-270 - 15);
+            DateTime time4 = saving.alarmTime.AddMinutes(-270 - saving.fallAsleepTime);
             if (time4.Minute < 10)
             {
                 Time4.Text = time4.Hour + ":" + "0" + time4.Minute.ToString();
@@ -91,7 +94,7 @@ namespace SleepWell
                 Time4.Text = time4.Hour + ":" + time4.Minute.ToString();
             }
 
-            DateTime time3 = saving.alarmTime.AddMinutes(-360 - 15);
+            DateTime time3 = saving.alarmTime.AddMinutes(-360 - saving.fallAsleepTime);
             if (time3.Minute < 10)
             {
                 Time3.Text = time3.Hour + ":" + "0" + time3.Minute.ToString();
@@ -101,7 +104,7 @@ namespace SleepWell
                 Time3.Text = time3.Hour + ":" + time3.Minute.ToString();
             }
 
-            DateTime time2 = saving.alarmTime.AddMinutes(-450 - 15);
+            DateTime time2 = saving.alarmTime.AddMinutes(-450 - saving.fallAsleepTime);
             if (time2.Minute < 10)
             {
                 Time2.Text = time2.Hour + ":" + "0" + time2.Minute.ToString();
@@ -111,7 +114,7 @@ namespace SleepWell
                 Time2.Text = time2.Hour + ":" + time2.Minute.ToString();
             }
 
-            DateTime time1 = saving.alarmTime.AddMinutes(-540 - 15);
+            DateTime time1 = saving.alarmTime.AddMinutes(-540 - saving.fallAsleepTime);
             if (time1.Minute < 10)
             {
                 Time1.Text = time1.Hour + ":" + "0" + time1.Minute.ToString();

@@ -52,6 +52,10 @@
         <!--Link na multilanguage:    https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows     -->
 
         <!--Settings options-->
+        <Grid>
+            <Label x:Name="FallAsleepTimeText" Text="Dĺžka zaspávania" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
+            <Picker x:Name="FallAsleepTimePicker" TextColor="{Binding textColour}" SelectedIndexChanged="FallAsleepTimeChange" HorizontalOptions="End" WidthRequest="100" />
+        </Grid>
         <Line Stroke="Black" X2="500" />
         <Grid>
             <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />

@@ -34,6 +34,7 @@ namespace SleepWell
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
+            saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             sr.Close();
             if (saving.language == 1)
             {
@@ -89,6 +90,7 @@ namespace SleepWell
                 writer.WriteLine(saving.language);
                 writer.WriteLine(saving.alarmNote);
                 writer.WriteLine(saving.alarmSound);
+                writer.WriteLine(saving.fallAsleepTime);
                 writer.Close();
             }
             OnTimerTick();
@@ -186,7 +188,7 @@ namespace SleepWell
             {
                 sleepCycles -= 15;
             }
-            sleepCycles /= 90;
+            sleepCycles /= 89;
             sleepCycles = (float)Math.Floor(sleepCycles);
 
 

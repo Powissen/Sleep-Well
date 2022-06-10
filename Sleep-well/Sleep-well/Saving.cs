@@ -9,5 +9,6 @@ namespace SleepWell
         public int language;
         public string alarmNote;
         public int alarmSound;
+        public int fallAsleepTime;
     }
 }

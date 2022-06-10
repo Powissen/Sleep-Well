@@ -32,6 +32,13 @@ namespace SleepWell
             LanguagePicker.Items.Add("Slovenčina");
             LanguagePicker.Items.Add("English");
 
+            FallAsleepTimePicker.Items.Add("5m");
+            FallAsleepTimePicker.Items.Add("10m");
+            FallAsleepTimePicker.Items.Add("15m");
+            FallAsleepTimePicker.Items.Add("20m");
+            FallAsleepTimePicker.Items.Add("25m");
+            FallAsleepTimePicker.Items.Add("30m");
+
 
 
 
@@ -41,10 +48,32 @@ namespace SleepWell
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
+            saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
             SoundPicker.SelectedIndex = saving.alarmSound;
+            switch (saving.fallAsleepTime)
+            {
+                case 5:
+                    FallAsleepTimePicker.SelectedIndex = 0;
+                    break;
+                case 10:
+                    FallAsleepTimePicker.SelectedIndex = 1;
+                    break;
+                case 15:
+                    FallAsleepTimePicker.SelectedIndex = 2;
+                    break;
+                case 20:
+                    FallAsleepTimePicker.SelectedIndex = 3;
+                    break;
+                case 25:
+                    FallAsleepTimePicker.SelectedIndex = 4;
+                    break;
+                case 30:
+                    FallAsleepTimePicker.SelectedIndex = 5;
+                    break;
+            }
 
 
             if (saving.darkMode)
@@ -69,6 +98,7 @@ namespace SleepWell
                 writer.WriteLine(saving.language);
                 writer.WriteLine(saving.alarmNote);
                 writer.WriteLine(saving.alarmSound);
+                writer.WriteLine(saving.fallAsleepTime);
                 writer.Close();
             }
         }
@@ -209,6 +239,32 @@ namespace SleepWell
         private void AlarmNoteSave(object sender, EventArgs e)
         {
             saving.alarmNote = _entry.Text;
+            SaveData();
+        }
+
+        private void FallAsleepTimeChange(object sender, EventArgs e)
+        {
+            switch (FallAsleepTimePicker.SelectedIndex)
+            {
+                case 0:
+                    saving.fallAsleepTime = 5;
+                    break;
+                case 1:
+                    saving.fallAsleepTime = 10;
+                    break;
+                case 2:
+                    saving.fallAsleepTime = 15;
+                    break;
+                case 3:
+                    saving.fallAsleepTime = 20;
+                    break;
+                case 4:
+                    saving.fallAsleepTime = 25;
+                    break;
+                case 5:
+                    saving.fallAsleepTime = 30;
+                    break;
+            }
             SaveData();
         }
 

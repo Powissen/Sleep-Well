@@ -29,6 +29,7 @@ namespace SleepWell
                 saving.language = 0;
                 saving.alarmNote = "";
                 saving.alarmSound = 2;
+                saving.fallAsleepTime = 15;
 
                 using (StreamWriter writer = new StreamWriter(_filePath, false))
                 {
@@ -37,6 +38,7 @@ namespace SleepWell
                     writer.WriteLine(saving.language);
                     writer.WriteLine("");
                     writer.WriteLine(saving.alarmSound);
+                    writer.WriteLine(saving.fallAsleepTime);
                     writer.Close();
                 }
             }
@@ -47,6 +49,7 @@ namespace SleepWell
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
+            saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             sr.Close();
 
             if (saving.language == 1)

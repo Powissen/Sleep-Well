@@ -57,7 +57,7 @@
             </Frame>
         </Grid>
 
-        <Label x:Name="Note" Text="*Aplikácia počíta s priemerným časom zaspatia (15minút)" TextColor="{Binding textColour}" HorizontalTextAlignment="Start" Padding="4, 10, 0, 20" FontSize="10"/>
+        <Label x:Name="Note" Text="" TextColor="{Binding textColour}" HorizontalTextAlignment="Start" Padding="4, 10, 0, 20" FontSize="10"/>
         <Grid>
             <Frame BackgroundColor="DarkGreen" Padding="10" HeightRequest="1" WidthRequest="1" HorizontalOptions="Start" Margin="2, 0, 0, 0" />
             <Label x:Name="Explanation1" Text="Najvhodnejší čas na spánok" Margin="35, 0, 0, 0" VerticalOptions="Center" FontSize="12" TextColor="{Binding textColour}"/>
