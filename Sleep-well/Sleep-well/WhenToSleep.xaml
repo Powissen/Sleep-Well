@@ -27,9 +27,9 @@
                     BackgroundColor="Transparent"/>
         </Grid>
 
-        <Label x:Name="HeaderText" Text="Odporúčané časy na spánok vypočítané podľa spánkových cyklov" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" FontSize="20" Padding="0,20,0,15"/>
+        <Label x:Name="HeaderText" Text="Časy na spánok vypočítané podľa spánkových cyklov" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" FontSize="20" Padding="0,20,0,15"/>
 
-        <Line Stroke="Black" X2="500" />
+        <Line Stroke="#787878" X2="500" />
 
         <Label x:Name="AlarmTime" TextColor="{Binding textColour}" HorizontalTextAlignment="Center" Padding="0,15,0,0" FontSize="20"/>
 

@@ -40,11 +40,12 @@
                     FontSize="30"
                     HorizontalOptions="Center"
                     PropertyChanged="OnTimePickerPropertyChanged" />
-            <Line Stroke="Black" X2="500" />
+            <Line Stroke="#787878" X2="500" />
             <Grid>
                 <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="DarkGray" TextColor="{Binding textColour}" BackgroundColor="{Binding barColour}" HorizontalOptions="Start" WidthRequest="250"/>
                 <Button x:Name="SaveButton" Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End" CornerRadius="15"/>
             </Grid>
+            <Line Stroke="#787878" X2="500" />
 
         </StackLayout>
 
@@ -56,17 +57,17 @@
             <Label x:Name="FallAsleepTimeText" Text="Dĺžka zaspávania" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="FallAsleepTimePicker" TextColor="{Binding textColour}" SelectedIndexChanged="FallAsleepTimeChange" HorizontalOptions="End" WidthRequest="100" />
         </Grid>
-        <Line Stroke="Black" X2="500" />
+        <Line Stroke="#787878" X2="500" />
         <Grid>
             <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
         </Grid>
-        <Line Stroke="Black" X2="500" />
+        <Line Stroke="#787878" X2="500" />
         <Grid>
             <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" WidthRequest="100" />
         </Grid>
-        <Line Stroke="Black" X2="500" />
+        <Line Stroke="#787878" X2="500" />
         <Grid>
             <Label x:Name="SoundText" Text="Zvuk budíka" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="SoundPicker" TextColor="{Binding textColour}" SelectedIndexChanged="SoundChange" HorizontalOptions="End" WidthRequest="100" />
@@ -79,6 +80,6 @@
                     Margin="0, 0, 120, 0"  
                     BackgroundColor="Transparent"/>
         </Grid>
-        <Line Stroke="Black" X2="500" />
+        <Line Stroke="#787878" X2="500" />
     </StackLayout>
 </ContentPage>

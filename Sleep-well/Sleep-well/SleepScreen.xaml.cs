@@ -19,6 +19,8 @@ namespace SleepWell
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
         public DateTime TimeWhenTimerEnabled;
         private bool popupShowed;
+        string notificationTitle;
+        string notificationDescription;
 
         public SleepScreen()
         {
@@ -132,11 +134,22 @@ namespace SleepWell
                     player.Loop = true;
                     showPopup();
 
+                    if (saving.language == 1)
+                    {
+                        notificationTitle = "Good morning :-)";
+                        notificationDescription = "The alarm was turned on, another great day is ahead of us!";
+                    }
+                    else
+                    {
+                        notificationTitle = "Dobré ráno :-)";
+                        notificationDescription = "Budík bol zapnutý, ďalší skvelý deň je pred nami!";
+                    }
+
                     var notification = new NotificationRequest
                     {
                         BadgeNumber = 1,
-                        Title = "Good morning :-)",
-                        Description = "The alarm was turned on, hope you feel fresh.",
+                        Title = notificationTitle,
+                        Description = notificationDescription,
                         NotificationId = 1337,
 
                     };

@@ -14,7 +14,7 @@ namespace SleepWell.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.3.0.26")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -24053,19 +24053,22 @@ namespace SleepWell.Droid
 			public const int SleepWellLogo1024 = 2131165373;
 			
 			// aapt resource value: 0x7F0700BE
-			public const int splash_screen = 2131165374;
+			public const int SleepWellLogo_Small = 2131165374;
 			
 			// aapt resource value: 0x7F0700BF
-			public const int test_custom_background = 2131165375;
+			public const int splash_screen = 2131165375;
 			
 			// aapt resource value: 0x7F0700C0
-			public const int tooltip_frame_dark = 2131165376;
+			public const int test_custom_background = 2131165376;
 			
 			// aapt resource value: 0x7F0700C1
-			public const int tooltip_frame_light = 2131165377;
+			public const int tooltip_frame_dark = 2131165377;
 			
 			// aapt resource value: 0x7F0700C2
-			public const int unmuted = 2131165378;
+			public const int tooltip_frame_light = 2131165378;
+			
+			// aapt resource value: 0x7F0700C3
+			public const int unmuted = 2131165379;
 			
 			static Drawable()
 			{

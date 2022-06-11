@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SleepWell.Droid
 {
-    [Activity(Label = "SplashActivity", MainLauncher = true, Theme ="@style/Theme.Splash", NoHistory = true)]
+    [Activity(Label = "SplashActivity", MainLauncher = true, Theme ="@style/MyTheme.Splash", NoHistory = true)]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -29,7 +29,6 @@ namespace SleepWell.Droid
 
         async Task SimulateStartup()
         {
-            await Task.Delay(TimeSpan.FromSeconds(5));
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }

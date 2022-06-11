@@ -164,6 +164,7 @@ namespace SleepWell
                 TimerHeader.Text = "Budík je nastavený na:";
                 _entry.Placeholder = "Tu nastavte poznámku";
                 SaveButton.Text = "ULOŽIŤ";
+                FallAsleepTimeText.Text = "Dĺžka zaspatia";
                 DarkModeText.Text = "Tmavý režim";
                 LanguageText.Text = "Jazyk";
                 SoundText.Text = "Zvuk budíka";
@@ -181,6 +182,7 @@ namespace SleepWell
                 TimerHeader.Text = "The alarm is set to:";
                 _entry.Placeholder = "Set a note here";
                 SaveButton.Text = "SAVE";
+                FallAsleepTimeText.Text = "Fall asleep time";
                 DarkModeText.Text = "Dark mode";
                 LanguageText.Text = "Language";
                 SoundText.Text = "Alarm sound";
