@@ -168,8 +168,6 @@ namespace SleepWell
                 Frame3.BackgroundColor = Color.IndianRed;
                 Frame2.BackgroundColor = Color.Green;
                 Frame1.BackgroundColor = Color.DarkGreen;
-                Console.WriteLine("vynulovanie " + time6 +" " +DateTime.Now);
-
             }
             return true;
         }
