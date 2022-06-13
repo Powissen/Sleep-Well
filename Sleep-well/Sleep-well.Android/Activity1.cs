@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace SleepWell.Droid
 {
-    [Activity(Label = "SplashActivity", MainLauncher = true, Theme ="@style/MyTheme.Splash", NoHistory = true)]
-    public class SplashActivity : Activity
+    [Activity(Label = "SleepWell", MainLauncher = true, Theme ="@style/MyTheme.Splash", NoHistory = true)]
+    public class SleepWell : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
