@@ -56,6 +56,7 @@ namespace SleepWell
                 Explanation2.Text = "Good time to sleep";
                 Explanation3.Text = "Less suitable time to sleep";
                 Explanation4.Text = "Unsuitable time to sleep";
+                Explanation5.Text = "Impossible time to sleep";
             }
             else
             {
@@ -74,6 +75,9 @@ namespace SleepWell
                 Time6.Text = time6.Hour + ":" + time6.Minute.ToString();
             }
 
+         
+
+
             DateTime time5 = saving.alarmTime.AddMinutes(-180 - saving.fallAsleepTime);
             if (time5.Minute < 10)
             {
@@ -84,6 +88,12 @@ namespace SleepWell
                 Time5.Text = time5.Hour + ":" + time5.Minute.ToString();
             }
 
+            if (time5 < DateTime.Now)
+            {
+                Frame5.BackgroundColor = Color.FromHex("808080");
+            }
+
+
             DateTime time4 = saving.alarmTime.AddMinutes(-270 - saving.fallAsleepTime);
             if (time4.Minute < 10)
             {
@@ -93,6 +103,11 @@ namespace SleepWell
             {
                 Time4.Text = time4.Hour + ":" + time4.Minute.ToString();
             }
+            if (time4 < DateTime.Now)
+            {
+                Frame4.BackgroundColor = Color.FromHex("808080");
+            }
+
 
             DateTime time3 = saving.alarmTime.AddMinutes(-360 - saving.fallAsleepTime);
             if (time3.Minute < 10)
@@ -104,6 +119,12 @@ namespace SleepWell
                 Time3.Text = time3.Hour + ":" + time3.Minute.ToString();
             }
 
+            if (time3 < DateTime.Now)
+            {
+                Frame3.BackgroundColor = Color.FromHex("808080");
+            }
+
+
             DateTime time2 = saving.alarmTime.AddMinutes(-450 - saving.fallAsleepTime);
             if (time2.Minute < 10)
             {
@@ -112,6 +133,11 @@ namespace SleepWell
             else
             {
                 Time2.Text = time2.Hour + ":" + time2.Minute.ToString();
+            }
+
+            if (time2 < DateTime.Now)
+            {
+                Frame2.BackgroundColor = Color.FromHex("808080");
             }
 
             DateTime time1 = saving.alarmTime.AddMinutes(-540 - saving.fallAsleepTime);
@@ -123,6 +149,21 @@ namespace SleepWell
             {
                 Time1.Text = time1.Hour + ":" + time1.Minute.ToString();
             }
+
+            if (time1 < DateTime.Now)
+            {
+                Frame1.BackgroundColor = Color.FromHex("808080");
+            }
+            if (time6 < DateTime.Now)
+            {
+                Frame5.BackgroundColor = Color.DarkRed;
+                Frame4.BackgroundColor = Color.IndianRed;
+                Frame3.BackgroundColor = Color.IndianRed;
+                Frame2.BackgroundColor = Color.Green;
+                Frame1.BackgroundColor = Color.DarkGreen;
+
+            }
+
         }
 
 
