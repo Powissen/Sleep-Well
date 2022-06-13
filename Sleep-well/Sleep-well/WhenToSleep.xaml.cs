@@ -64,7 +64,18 @@ namespace SleepWell
                 AlarmTime.Text = "Budík je nastavený na:\n" + alarmTime;
             }
 
+            while (saving.alarmTime <= DateTime.Now)
+            {
+                saving.alarmTime = saving.alarmTime.AddDays(1);
+            }
 
+
+            OnTimerTick();
+            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
+        }
+
+        bool OnTimerTick()
+        {
             DateTime time6 = saving.alarmTime.AddMinutes(-90 - saving.fallAsleepTime);
             if (time6.Minute < 10)
             {
@@ -74,8 +85,6 @@ namespace SleepWell
             {
                 Time6.Text = time6.Hour + ":" + time6.Minute.ToString();
             }
-
-         
 
 
             DateTime time5 = saving.alarmTime.AddMinutes(-180 - saving.fallAsleepTime);
@@ -87,8 +96,7 @@ namespace SleepWell
             {
                 Time5.Text = time5.Hour + ":" + time5.Minute.ToString();
             }
-
-            if (time5 < DateTime.Now)
+            if (time5 < DateTime.Now.AddMinutes(-1))
             {
                 Frame5.BackgroundColor = Color.FromHex("808080");
             }
@@ -103,7 +111,7 @@ namespace SleepWell
             {
                 Time4.Text = time4.Hour + ":" + time4.Minute.ToString();
             }
-            if (time4 < DateTime.Now)
+            if (time4 < DateTime.Now.AddMinutes(-1))
             {
                 Frame4.BackgroundColor = Color.FromHex("808080");
             }
@@ -118,8 +126,7 @@ namespace SleepWell
             {
                 Time3.Text = time3.Hour + ":" + time3.Minute.ToString();
             }
-
-            if (time3 < DateTime.Now)
+            if (time3 < DateTime.Now.AddMinutes(-1))
             {
                 Frame3.BackgroundColor = Color.FromHex("808080");
             }
@@ -134,8 +141,7 @@ namespace SleepWell
             {
                 Time2.Text = time2.Hour + ":" + time2.Minute.ToString();
             }
-
-            if (time2 < DateTime.Now)
+            if (time2 < DateTime.Now.AddMinutes(-1))
             {
                 Frame2.BackgroundColor = Color.FromHex("808080");
             }
@@ -149,22 +155,25 @@ namespace SleepWell
             {
                 Time1.Text = time1.Hour + ":" + time1.Minute.ToString();
             }
-
-            if (time1 < DateTime.Now)
+            if (time1 < DateTime.Now.AddMinutes(-1))
             {
                 Frame1.BackgroundColor = Color.FromHex("808080");
             }
-            if (time6 < DateTime.Now)
+
+
+            if (time6.AddMinutes(1) < DateTime.Now)
             {
                 Frame5.BackgroundColor = Color.DarkRed;
                 Frame4.BackgroundColor = Color.IndianRed;
                 Frame3.BackgroundColor = Color.IndianRed;
                 Frame2.BackgroundColor = Color.Green;
                 Frame1.BackgroundColor = Color.DarkGreen;
+                Console.WriteLine("vynulovanie " + time6 +" " +DateTime.Now);
 
             }
-
+            return true;
         }
+
 
 
         void TipsForSleep(object sender, EventArgs args)
