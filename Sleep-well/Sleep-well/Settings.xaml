@@ -35,7 +35,7 @@
         <StackLayout>
             <Label x:Name="TimerHeader"  Text="Budík je nastavený na:" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="20"/>
             <TimePicker x:Name="_timePicker"
-                    Format="T"
+                    Format="HH:mm"
                     TextColor="{Binding textColour}"
                     FontSize="30"
                     HorizontalOptions="Center"
