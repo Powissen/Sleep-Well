@@ -168,12 +168,14 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
+                    popupShowed = false;
                 }
                 else
                 {
                     App.Current.MainPage = new MainPage();
                     sleeping = false;
                     player.Stop();
+                    popupShowed = false;
                 }
             }
             else
@@ -183,6 +185,7 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
+                    popupShowed = false;
                 }
                 else
                 {
