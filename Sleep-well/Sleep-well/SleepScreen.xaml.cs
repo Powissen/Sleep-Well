@@ -52,27 +52,19 @@ namespace SleepWell
 
             if (saving.language == 1)
             {
-                if (saving.alarmTime.Minute < 10)
-                {
-                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
-                }
-                else
-                {
-                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
-                }
                 StopSleepButton.Text = "Stop sleep";
                 Warning.Text = "Please leave this window opened and turn off the screen";
+                if (saving.alarmTime.Minute < 10)
+                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
+                else
+                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
             }
             else
             {
                 if (saving.alarmTime.Minute < 10)
-                {
                     alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
-                }
                 else
-                {
                     alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
-                }
             }
 
             while (saving.alarmTime <= DateTime.Now)
@@ -99,7 +91,7 @@ namespace SleepWell
 
         bool OnTimerTick()
         {
-            if (sleepMusicCycles[0] < sleepMusicCycles[1] && !player.IsPlaying)
+            if (sleeping && saving.musicToSleep && sleepMusicCycles[1] < sleepMusicCycles[0] && !player.IsPlaying)
             {
                 player.Play();
                 sleepMusicCycles[1]++;
@@ -111,7 +103,6 @@ namespace SleepWell
             }
             else
             {
-
                 Time = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
             }
             OnPropertyChanged(nameof(Time));
@@ -126,30 +117,31 @@ namespace SleepWell
                 alarmAfter.Text = "Budík za: " + after.Hours + " hodín a " + after.Minutes + " minút";
             }
 
+
             if (DateTime.Now >= saving.alarmTime && sleeping)
             {
                 Vibration.Vibrate();
 
-                switch (saving.alarmSound)
-                {
-                    case 0:
-                        player.Load("Classic.mp3");
-                        break;
-                    case 1:
-                        player.Load("Nature.mp3");
-                        break;
-                    case 2:
-                        player.Load("ChillMusic.mp3");
-                        break;
-                    case 3:
-                        player.Load("Guitar.mp3");
-                        break;
-                }
-                player.Volume = 100;
-
                 if (!popupShowed)
                 {
                     popupShowed = true;
+                    player.Stop();
+                    switch (saving.alarmSound)
+                    {
+                        case 0:
+                            player.Load("Classic.mp3");
+                            break;
+                        case 1:
+                            player.Load("Nature.mp3");
+                            break;
+                        case 2:
+                            player.Load("ChillMusic.mp3");
+                            break;
+                        case 3:
+                            player.Load("Guitar.mp3");
+                            break;
+                    }
+                    player.Volume = 100;
                     player.Play();
                     player.Loop = true;
                     showPopup();
@@ -189,6 +181,11 @@ namespace SleepWell
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
                     popupShowed = false;
+
+                    if (saving.alarmTime.Minute < 10)
+                        alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
+                    else
+                        alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
                 }
                 else
                 {
@@ -206,6 +203,11 @@ namespace SleepWell
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
                     popupShowed = false;
+
+                    if (saving.alarmTime.Minute < 10)
+                        alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
+                    else
+                        alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
                 }
                 else
                 {
@@ -227,7 +229,9 @@ namespace SleepWell
             sleepCycles /= 89;
             sleepCycles = (float)Math.Floor(sleepCycles);
 
+            sleeping = false;
             player.Stop();
+
 
             if (saving.language == 1)
             {
@@ -238,7 +242,6 @@ namespace SleepWell
                 DisplayAlert("Zhrnutie spánku:", "Dĺžka spánku: " + sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s \n" + "Spánkových cyklov: " + sleepCycles.ToString(), "OK");
             }
             App.Current.MainPage = new MainPage();
-            sleeping = false;
         }
 
         public void OpenMainPageButton(object sender, EventArgs args)
