@@ -11,6 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\HeaderFont.ttf" />
+    <None Remove="Fonts\SevenSegment.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\HeaderFont.ttf" />
+    <EmbeddedResource Include="Fonts\SevenSegment.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspose.Slides.NET" Version="22.4.0" />
     <PackageReference Include="Plugin.LocalNotification" Version="9.2.0" />
     <PackageReference Include="Plugin.MediaManager" Version="1.1.1" />
@@ -25,6 +35,12 @@
     <Reference Include="Mono.Android">
       <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v10.0\Mono.Android.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -8,8 +8,8 @@
     <StackLayout>
         <!--Top menu-->
         <Grid>
-            <Frame BackgroundColor="Orange" Padding="10" CornerRadius="0">
-                <Label x:Name="Header" Text="SleepWell" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            <Frame BackgroundColor="Orange" Padding="15" CornerRadius="0">
+                <Label x:Name="Header" Text="SleepWell" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontSize="25" FontFamily="HeaderFont"/>
             </Frame>
         </Grid>
 
@@ -18,8 +18,9 @@
             x:Name="time"
             Text="{Binding Time}" 
             HorizontalOptions="Center" 
-            FontSize="80"
+            FontSize="100"
             TextColor="White"
+            FontFamily="SevenSegment"
             Padding="0,60,0,0"/>
 
 

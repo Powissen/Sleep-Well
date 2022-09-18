@@ -10,12 +10,12 @@
 
         <Grid>
             <Frame BackgroundColor="Black" Padding="10" CornerRadius="0">
-                <Label Text="SleepWell" HorizontalTextAlignment="Center" TextColor="White" FontSize="20"/>
+                <Label Text="SleepWell" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White" FontSize="25" FontFamily="HeaderFont"/>
             </Frame>
-            <ImageButton Source="settings_icon.png"
+            <ImageButton Source="MenuIcon.png"
                     HorizontalOptions="End"
                     VerticalOptions="CenterAndExpand"
-                    Clicked="OpenSettings"
+                    Clicked="OpenMenu"
                     WidthRequest="40"
                     Padding="0, 0, 5, 0"
                     BackgroundColor="Transparent"/>
@@ -26,12 +26,13 @@
             x:Name="time"
             Text="{Binding Time}" 
             HorizontalOptions="Center" 
-            FontSize="80"
+            FontSize="100"
             TextColor="White"
+            FontFamily="SevenSegment"
             Padding="0,60,0,0"/>
 
 
-        <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23"/>
+        <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23" />
         <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 35"/>
         <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 10"/>
 

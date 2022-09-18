@@ -3,6 +3,9 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
+[assembly: ExportFont("SevenSegment.ttf", Alias = "SevenSegment")]
+[assembly: ExportFont("HeaderFont.ttf", Alias = "HeaderFont")]
 namespace SleepWell
 {
     public partial class App : Application

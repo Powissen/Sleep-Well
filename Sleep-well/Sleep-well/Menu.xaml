@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepWell.Menu"
+             BackgroundImageSource="background.jpg">
+
+
+    <StackLayout>
+        <!--Top menu-->
+        <Grid>
+            <Frame BackgroundColor="Orange" Padding="15" CornerRadius="0">
+                <Label x:Name="Header" Text="SleepWell" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontSize="25" FontFamily="HeaderFont"/>
+            </Frame>
+            <ImageButton Source="back_arrow.png"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="OpenMainPage"
+                    WidthRequest="60"
+                    Padding="5, 0, 0, 0"  
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+
+        <Grid HeightRequest="80" WidthRequest="350" Padding="5, 20, 5, 0">
+            <Frame BackgroundColor="Gray" CornerRadius="15" HeightRequest="50" WidthRequest="350" HorizontalOptions="CenterAndExpand" x:Name="SettingsFrame">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenSettings" />
+                </Frame.GestureRecognizers>
+                <Label x:Name="SettingsLabel" Text="Nastavenia" Padding="50, 0, 0, 0" VerticalOptions="Center" FontSize="25"/>
+            </Frame>
+            <ImageButton Source="settings_icon.png"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="40"
+                    Margin="10, 0, 0, 0"
+                    Clicked="OpenSettings"
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+
+        <Grid HeightRequest="80" WidthRequest="350" Padding="5, 20, 5, 0">
+            <Frame BackgroundColor="#2B2B2B" CornerRadius="15" HeightRequest="50" WidthRequest="350" HorizontalOptions="CenterAndExpand" x:Name="StatisticsFrame">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OpenStats" />
+                </Frame.GestureRecognizers>
+                <Label x:Name="StatsLabel" Text="Štatistiky spánku" Padding="50, 0, 0, 0" VerticalOptions="Center" FontSize="25"/>
+            </Frame>
+            <ImageButton Source="stats.png"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="40"
+                    Margin="10, 0, 0, 0"
+                    Clicked="OpenStats"
+                    BackgroundColor="Transparent"/>
+        </Grid>
+
+        <Label Text="SleepWell  |  Ver. 1.0" TextColor="Gray" VerticalOptions="EndAndExpand" HorizontalOptions="Center" />
+    </StackLayout>
+</ContentPage>

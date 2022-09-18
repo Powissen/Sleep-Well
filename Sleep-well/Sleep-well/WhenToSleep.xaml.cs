@@ -20,13 +20,13 @@ namespace SleepWell
 
 
             StreamReader sr = new StreamReader(_filePath);
-            //saving.alarmEnabled = Convert.ToBoolean(sr.ReadLine());
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
             saving.language = Convert.ToInt32(sr.ReadLine());
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
+            saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             if (saving.darkMode)
@@ -51,7 +51,7 @@ namespace SleepWell
                 Header.Text = "When to go to bed?";
                 HeaderText.Text = "Sleep times calculated based on sleep cycles";
                 AlarmTime.Text = "The alarm is set to:\n" + alarmTime;
-                Note.Text = "*App calculates with the set time to fall asleep (" + saving.fallAsleepTime + "m)";
+                Note.Text = "*App calculates with the set time to fall asleep (" + saving.fallAsleepTime + "min)";
                 Explanation1.Text = "Best time to sleep";
                 Explanation2.Text = "Good time to sleep";
                 Explanation3.Text = "Less suitable time to sleep";
@@ -60,7 +60,7 @@ namespace SleepWell
             }
             else
             {
-                Note.Text = "*Aplikácia počíta s nastaveným časom zaspatia (" + saving.fallAsleepTime + "m)";
+                Note.Text = "*Aplikácia počíta s nastaveným časom zaspatia (" + saving.fallAsleepTime + "min)";
                 AlarmTime.Text = "Budík je nastavený na:\n" + alarmTime;
             }
 

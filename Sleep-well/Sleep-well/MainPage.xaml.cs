@@ -30,6 +30,7 @@ namespace SleepWell
                 saving.alarmNote = "";
                 saving.alarmSound = 2;
                 saving.fallAsleepTime = 15;
+                saving.musicToSleep = true;
 
                 using (StreamWriter writer = new StreamWriter(_filePath, false))
                 {
@@ -39,6 +40,7 @@ namespace SleepWell
                     writer.WriteLine("");
                     writer.WriteLine(saving.alarmSound);
                     writer.WriteLine(saving.fallAsleepTime);
+                    writer.WriteLine(saving.musicToSleep);
                     writer.Close();
                 }
             }
@@ -50,6 +52,7 @@ namespace SleepWell
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
+            saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             if (saving.language == 1)
@@ -78,10 +81,13 @@ namespace SleepWell
             }
         }
 
-        async void OpenSettings(object sender, EventArgs args)
+        //async void OpenSettings(object sender, EventArgs args)
+        //{
+        //    App.Current.MainPage = new Settings();
+        //}
+        async void OpenMenu(object sender, EventArgs args)
         {
-            App.Current.MainPage = new Settings();
-
+            App.Current.MainPage = new Menu();
         }
         void OpenWhenToSleep(object sender, EventArgs args)
         {

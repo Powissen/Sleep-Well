@@ -8,8 +8,8 @@
     <StackLayout>
         <!--Top menu-->
         <Grid>
-            <Frame BackgroundColor="Orange" Padding="10" CornerRadius="0">
-                <Label x:Name="Header" Text="Kedy ísť spať?" HorizontalTextAlignment="Center" TextColor="Black" FontSize="20"/>
+            <Frame BackgroundColor="Orange" Padding="15" CornerRadius="0">
+                <Label x:Name="Header" Text="Kedy ísť spať?" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontSize="25" FontFamily="HeaderFont"/>
             </Frame>
             <ImageButton Source="back_arrow.png"
                     HorizontalOptions="Start"
@@ -22,7 +22,7 @@
                     HorizontalOptions="End"
                     VerticalOptions="CenterAndExpand"
                     Clicked="TipsForSleep"
-                    WidthRequest="50"
+                    WidthRequest="45"
                     Padding="5, 0, 5, 0"  
                     BackgroundColor="Transparent"/>
         </Grid>

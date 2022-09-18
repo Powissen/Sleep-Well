@@ -13,7 +13,8 @@ namespace SleepWell
     public partial class SleepScreen : ContentPage
     {
         private bool sleeping;
-        Saving saving = new Saving();
+        private int[] sleepMusicCycles = new int[] { 0, 0 };
+    Saving saving = new Saving();
         public string Time { get; set; } = "";
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
@@ -37,7 +38,18 @@ namespace SleepWell
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
+            saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
+
+            if (saving.musicToSleep)
+            {
+                sleepMusicCycles[0] = saving.fallAsleepTime / 5;
+                player.Load("SleepMusic.mp3");
+                player.Volume = 50;
+                player.Play();
+                sleepMusicCycles[1]++;
+            }
+
             if (saving.language == 1)
             {
                 if (saving.alarmTime.Minute < 10)
@@ -63,22 +75,6 @@ namespace SleepWell
                 }
             }
 
-            switch (saving.alarmSound)
-            {
-                case 0:
-                    player.Load("Classic.mp3");
-                    break;
-                case 1:
-                    player.Load("Nature.mp3");
-                    break;
-                case 2:
-                    player.Load("ChillMusic.mp3");
-                    break;
-                case 3:
-                    player.Load("Guitar.mp3");
-                    break;
-            }
-
             while (saving.alarmTime <= DateTime.Now)
             {
                 saving.alarmTime = saving.alarmTime.AddDays(1);
@@ -93,6 +89,7 @@ namespace SleepWell
                 writer.WriteLine(saving.alarmNote);
                 writer.WriteLine(saving.alarmSound);
                 writer.WriteLine(saving.fallAsleepTime);
+                writer.WriteLine(saving.musicToSleep);
                 writer.Close();
             }
             OnTimerTick();
@@ -102,6 +99,12 @@ namespace SleepWell
 
         bool OnTimerTick()
         {
+            if (sleepMusicCycles[0] < sleepMusicCycles[1] && !player.IsPlaying)
+            {
+                player.Play();
+                sleepMusicCycles[1]++;
+            }
+
             if (DateTime.Now.Minute < 10)
             {
                 Time = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
@@ -126,6 +129,23 @@ namespace SleepWell
             if (DateTime.Now >= saving.alarmTime && sleeping)
             {
                 Vibration.Vibrate();
+
+                switch (saving.alarmSound)
+                {
+                    case 0:
+                        player.Load("Classic.mp3");
+                        break;
+                    case 1:
+                        player.Load("Nature.mp3");
+                        break;
+                    case 2:
+                        player.Load("ChillMusic.mp3");
+                        break;
+                    case 3:
+                        player.Load("Guitar.mp3");
+                        break;
+                }
+                player.Volume = 100;
 
                 if (!popupShowed)
                 {
@@ -207,6 +227,7 @@ namespace SleepWell
             sleepCycles /= 89;
             sleepCycles = (float)Math.Floor(sleepCycles);
 
+            player.Stop();
 
             if (saving.language == 1)
             {

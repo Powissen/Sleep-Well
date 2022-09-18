@@ -39,7 +39,12 @@ namespace SleepWell
             FallAsleepTimePicker.Items.Add("25m");
             FallAsleepTimePicker.Items.Add("30m");
 
-
+            BackgroundColor = Color.FromHex("1f1f1f");
+            textColour = "LightGray";
+            barColour = "Black";
+            OnPropertyChanged(nameof(textColour));
+            OnPropertyChanged(nameof(barColour));
+            saving.darkMode = true;
 
 
             StreamReader sr = new StreamReader(_filePath);
@@ -49,6 +54,7 @@ namespace SleepWell
             saving.alarmNote = sr.ReadLine();
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
+            saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
@@ -76,9 +82,14 @@ namespace SleepWell
             }
 
 
-            if (saving.darkMode)
+            //if (saving.darkMode)
+            //{
+            //    DarkModeCheckBox.IsChecked = true;
+            //}
+
+            if (saving.musicToSleep)
             {
-                DarkModeCheckBox.IsChecked = true;
+                SleepMusicCheckBox.IsChecked = true;
             }
 
             _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
@@ -99,6 +110,7 @@ namespace SleepWell
                 writer.WriteLine(saving.alarmNote);
                 writer.WriteLine(saving.alarmSound);
                 writer.WriteLine(saving.fallAsleepTime);
+                writer.WriteLine(saving.musicToSleep);
                 writer.Close();
             }
         }
@@ -129,30 +141,30 @@ namespace SleepWell
         }
 
         // -------------------------------------------------------------------------------------------
-        private void CheckBox_DarkMode(object sender, CheckedChangedEventArgs e)
-        {
+        //private void CheckBox_DarkMode(object sender, CheckedChangedEventArgs e)
+        //{
 
-            if (DarkModeCheckBox.IsChecked)
-            {
-                BackgroundColor = Color.FromHex("1f1f1f");
-                textColour = "LightGray";
-                barColour = "Black";
-                OnPropertyChanged(nameof(textColour));
-                OnPropertyChanged(nameof(barColour));
-                saving.darkMode = true;
-                SaveData();
-            }
-            else
-            {
-                BackgroundColor = Color.White;
-                textColour = "Black";
-                barColour = "LightGray";
-                OnPropertyChanged(nameof(textColour));
-                OnPropertyChanged(nameof(barColour));
-                saving.darkMode = false;
-                SaveData();
-            }
-        }
+        //    if (DarkModeCheckBox.IsChecked)
+        //    {
+        //        BackgroundColor = Color.FromHex("1f1f1f");
+        //        textColour = "LightGray";
+        //        barColour = "Black";
+        //        OnPropertyChanged(nameof(textColour));
+        //        OnPropertyChanged(nameof(barColour));
+        //        saving.darkMode = true;
+        //        SaveData();
+        //    }
+        //    else
+        //    {
+        //        BackgroundColor = Color.White;
+        //        textColour = "Black";
+        //        barColour = "LightGray";
+        //        OnPropertyChanged(nameof(textColour));
+        //        OnPropertyChanged(nameof(barColour));
+        //        saving.darkMode = false;
+        //        SaveData();
+        //    }
+        //}
         
         //Link na multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
 
@@ -161,11 +173,12 @@ namespace SleepWell
             if (LanguagePicker.SelectedIndex == 0)
             {
                 Header_Description.Text = "Nastavenia";
-                TimerHeader.Text = "Budík je nastavený na:";
+                TimerHeader.Text = "Nastavenie budíka";
                 _entry.Placeholder = "Tu nastavte poznámku";
                 SaveButton.Text = "ULOŽIŤ";
                 FallAsleepTimeText.Text = "Dĺžka zaspatia";
-                DarkModeText.Text = "Tmavý režim";
+                SleepMusicText.Text = "Hudba na zaspávanie";
+                //DarkModeText.Text = "Tmavý režim";
                 LanguageText.Text = "Jazyk";
                 SoundText.Text = "Zvuk budíka";
                 SoundPicker.Items.Clear();
@@ -179,11 +192,12 @@ namespace SleepWell
             else
             {
                 Header_Description.Text = "Settings";
-                TimerHeader.Text = "The alarm is set to:";
+                TimerHeader.Text = "Alarm setting";
                 _entry.Placeholder = "Set a note here";
                 SaveButton.Text = "SAVE";
                 FallAsleepTimeText.Text = "Fall asleep time";
-                DarkModeText.Text = "Dark mode";
+                SleepMusicText.Text = "Music for sleep";
+                //DarkModeText.Text = "Dark mode";
                 LanguageText.Text = "Language";
                 SoundText.Text = "Alarm sound";
                 SoundPicker.Items.Clear();
@@ -237,6 +251,18 @@ namespace SleepWell
             }
         }
 
+        private void SleepSoundWarning(object sender, EventArgs e)
+        {
+            if (saving.language == 1)
+            {
+                DisplayAlert("How does it work ? \n\n", "During the duration of falling asleep set above, you will hear music for calm and fast falling asleep.", "OK");
+            }
+            else
+            {
+                DisplayAlert("Ako to funguje? \n\n", "Počas dĺžky zaspávania nastavenej vyššie bude hrať hudba pre pokojné a rýchle zaspatie.", "OK");
+            }
+        }
+
 
         private void AlarmNoteSave(object sender, EventArgs e)
         {
@@ -270,11 +296,25 @@ namespace SleepWell
             SaveData();
         }
 
+        private void CheckBox_SleepMusic(object sender, CheckedChangedEventArgs e)
+        {
+            if (SleepMusicCheckBox.IsChecked)
+            {
+                saving.musicToSleep = true;
+                SaveData();
+            }
+            else
+            {
+                saving.musicToSleep = false;
+                SaveData();
+            }
+        }
 
-        void OpenMainPage(object sender, EventArgs args)
+
+        void OpenMenu(object sender, EventArgs args)
         {
             player.Stop();
-            App.Current.MainPage = new MainPage();
+            App.Current.MainPage = new Menu();
         }
     }
 }
