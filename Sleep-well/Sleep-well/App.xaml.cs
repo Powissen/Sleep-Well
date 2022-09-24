@@ -1,7 +1,4 @@
-﻿using SleepWell;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 
 [assembly: ExportFont("SevenSegment.ttf", Alias = "SevenSegment")]

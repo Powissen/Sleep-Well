@@ -1,6 +1,7 @@
 ﻿
 using Plugin.LocalNotification;
 using Plugin.SimpleAudioPlayer;
+using SleepWell.Services;
 using System;
 using System.IO;
 using Xamarin.Essentials;
@@ -10,11 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace SleepWell
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SleepScreen : ContentPage
+    public partial class SleepScreen : ContentPage, TickTimerInterface
     {
         private bool sleeping;
         private int[] sleepMusicCycles = new int[] { 0, 0 };
-    Saving saving = new Saving();
+        Saving saving = new Saving();
         public string Time { get; set; } = "";
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
@@ -22,13 +23,16 @@ namespace SleepWell
         private bool popupShowed;
         string notificationTitle;
         string notificationDescription;
+        public static bool shouldTickTimer;
 
         public SleepScreen()
         {
             InitializeComponent();
+
             sleeping = true;
             popupShowed = false;
             BindingContext = this;
+            shouldTickTimer = true;
             TimeWhenTimerEnabled = DateTime.Now;
 
             StreamReader sr = new StreamReader(_filePath);
@@ -84,12 +88,19 @@ namespace SleepWell
                 writer.WriteLine(saving.musicToSleep);
                 writer.Close();
             }
-            OnTimerTick();
             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
+            OnTimerTick();
+            DependencyService.Resolve<IForegroundService>().StartMyForegroundService();
         }
 
 
-        bool OnTimerTick()
+        public static void Tick()
+        {
+            DependencyService.Resolve<TickTimerInterface>().OnTimerTick();
+        }
+
+
+        public bool OnTimerTick()
         {
             if (sleeping && saving.musicToSleep && sleepMusicCycles[1] < sleepMusicCycles[0] && !player.IsPlaying)
             {
@@ -98,24 +109,20 @@ namespace SleepWell
             }
 
             if (DateTime.Now.Minute < 10)
-            {
                 Time = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
-            }
             else
-            {
                 Time = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
-            }
-            OnPropertyChanged(nameof(Time));
 
+            OnPropertyChanged(nameof(Time));
             TimeSpan after = saving.alarmTime.Subtract(DateTime.Now);
+
+
             if (saving.language == 1)
-            {
                 alarmAfter.Text = "Alarm after: " + after.Hours + " hours and " + after.Minutes + " minutes";
-            }
             else
-            {
                 alarmAfter.Text = "Budík za: " + after.Hours + " hodín a " + after.Minutes + " minút";
-            }
+
+
 
 
             if (DateTime.Now >= saving.alarmTime && sleeping)
@@ -128,18 +135,10 @@ namespace SleepWell
                     player.Stop();
                     switch (saving.alarmSound)
                     {
-                        case 0:
-                            player.Load("Classic.mp3");
-                            break;
-                        case 1:
-                            player.Load("Nature.mp3");
-                            break;
-                        case 2:
-                            player.Load("ChillMusic.mp3");
-                            break;
-                        case 3:
-                            player.Load("Guitar.mp3");
-                            break;
+                        case 0: player.Load("Classic.mp3"); break;
+                        case 1: player.Load("Nature.mp3"); break;
+                        case 2: player.Load("ChillMusic.mp3"); break;
+                        case 3: player.Load("Guitar.mp3"); break;
                     }
                     player.Volume = 100;
                     player.Play();
@@ -180,6 +179,7 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
+                    sleepMusicCycles[0] = 0;
                     popupShowed = false;
 
                     if (saving.alarmTime.Minute < 10)
@@ -189,10 +189,8 @@ namespace SleepWell
                 }
                 else
                 {
-                    App.Current.MainPage = new MainPage();
-                    sleeping = false;
                     player.Stop();
-                    popupShowed = false;
+                    OpenMainPage();
                 }
             }
             else
@@ -202,6 +200,7 @@ namespace SleepWell
                 {
                     saving.alarmTime = saving.alarmTime.AddMinutes(5);
                     player.Stop();
+                    sleepMusicCycles[0] = 0;
                     popupShowed = false;
 
                     if (saving.alarmTime.Minute < 10)
@@ -219,6 +218,7 @@ namespace SleepWell
 
         void OpenMainPage()
         {
+            DependencyService.Resolve<IForegroundService>().StopMyForegroundService();
             TimeSpan sleepLength = DateTime.Now.Subtract(TimeWhenTimerEnabled);
 
             float sleepCycles = sleepLength.Minutes + sleepLength.Hours * 60;
@@ -234,15 +234,14 @@ namespace SleepWell
 
 
             if (saving.language == 1)
-            {
                 DisplayAlert("Sleep summary:", "Sleep length: " + sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s \n" + "Sleep cycles: " + sleepCycles.ToString(), "OK");
-            }
             else
-            {
                 DisplayAlert("Zhrnutie spánku:", "Dĺžka spánku: " + sleepLength.Hours + "h " + sleepLength.Minutes + "m " + sleepLength.Seconds + "s \n" + "Spánkových cyklov: " + sleepCycles.ToString(), "OK");
-            }
+
+
             App.Current.MainPage = new MainPage();
         }
+
 
         public void OpenMainPageButton(object sender, EventArgs args)
         {

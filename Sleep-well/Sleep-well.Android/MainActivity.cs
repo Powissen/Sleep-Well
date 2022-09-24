@@ -1,12 +1,8 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Plugin.LocalNotification;
-using Android.Content;
-using Xamarin.Forms;
 using System.IO;
 
 namespace SleepWell.Droid
@@ -23,27 +19,22 @@ namespace SleepWell.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            
-            if (!File.Exists(_filePath))
-            {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.SetTitle("Warning");
-                alertDialog.SetMessage("Pre správne fungovanie aplikácie je potrebné zakázať optimalizáciu batérie pre túto aplikáciu! \n\nBattery optimization for this app must be disabled for the app to work properly!");
-                alertDialog.SetNeutralButton("OPEN SETTINGS", delegate {
-                    alertDialog.Dispose();
-                    Intent intent = new Intent();
-                    intent.SetAction(Android.Provider.Settings.ActionIgnoreBatteryOptimizationSettings);
-                    Forms.Context.StartActivity(intent);
-                });
-                alertDialog.Show();
-            }
+
+            //if (!File.Exists(_filePath))
+            //{
+            //    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            //    alertDialog.SetTitle("Warning");
+            //    alertDialog.SetMessage("Pre správne fungovanie aplikácie je potrebné zakázať optimalizáciu batérie pre túto aplikáciu! \n\nBattery optimization for this app must be disabled for the app to work properly!");
+            //    alertDialog.SetNeutralButton("OPEN SETTINGS", delegate {
+            //        alertDialog.Dispose();
+            //        Intent intent = new Intent();
+            //        intent.SetAction(Android.Provider.Settings.ActionIgnoreBatteryOptimizationSettings);
+            //        Forms.Context.StartActivity(intent);
+            //    });
+            //    alertDialog.Show();
+            //}
 
             LoadApplication(new App());
-        }
-
-        public static void TestVoid()
-        {
-
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

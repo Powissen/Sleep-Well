@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              x:Class="SleepWell.MainPage"
              BackgroundImageSource="background.jpg">
 
@@ -33,21 +32,7 @@
 
 
         <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23" />
-        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 35"/>
-        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 10"/>
-
-        <!-- <Label Text="Odporúčaný čas ísť spať je 22:00" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,100,00,0" FontSize="20"/>
-        <Label x:Name="alarmAfter" Text="nie je budík" HorizontalTextAlignment="Center" TextColor="DarkGray" Padding="0,5,0,0" FontSize="20"/>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,70,0,0" Spacing="50">
-
-            <Button Text="Idem spať o 10 minút"
-                    Clicked="o10"
-              BorderWidth="10" />
-            <Button Text="Idem spať"
-               BorderWidth="1"
-                    Clicked="o0"/>
-
-        </StackLayout>-->
+        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 35" />
+        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 10" />
     </StackLayout>
 </ContentPage>

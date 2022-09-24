@@ -1,10 +1,10 @@
 ﻿using Plugin.SimpleAudioPlayer;
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 
 namespace SleepWell
 {
@@ -26,7 +26,6 @@ namespace SleepWell
         public Settings()
         {
             InitializeComponent();
-
             BindingContext = this;
 
             LanguagePicker.Items.Add("Slovenčina");
@@ -61,24 +60,12 @@ namespace SleepWell
             SoundPicker.SelectedIndex = saving.alarmSound;
             switch (saving.fallAsleepTime)
             {
-                case 5:
-                    FallAsleepTimePicker.SelectedIndex = 0;
-                    break;
-                case 10:
-                    FallAsleepTimePicker.SelectedIndex = 1;
-                    break;
-                case 15:
-                    FallAsleepTimePicker.SelectedIndex = 2;
-                    break;
-                case 20:
-                    FallAsleepTimePicker.SelectedIndex = 3;
-                    break;
-                case 25:
-                    FallAsleepTimePicker.SelectedIndex = 4;
-                    break;
-                case 30:
-                    FallAsleepTimePicker.SelectedIndex = 5;
-                    break;
+                case 5: FallAsleepTimePicker.SelectedIndex = 0; break;
+                case 10: FallAsleepTimePicker.SelectedIndex = 1; break;
+                case 15: FallAsleepTimePicker.SelectedIndex = 2; break;
+                case 20: FallAsleepTimePicker.SelectedIndex = 3; break;
+                case 25:FallAsleepTimePicker.SelectedIndex = 4; break;
+                case 30:FallAsleepTimePicker.SelectedIndex = 5; break;
             }
 
 
@@ -125,6 +112,8 @@ namespace SleepWell
             }
         }
 
+
+
         void OnSwitchToggled(object sender, ToggledEventArgs args)
         {
             SetTriggerTime();
@@ -166,7 +155,7 @@ namespace SleepWell
         //    }
         //}
         
-        //Link na multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
+        //Multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
 
         private void LanguageChange(object sender, EventArgs e)
         {
@@ -274,24 +263,12 @@ namespace SleepWell
         {
             switch (FallAsleepTimePicker.SelectedIndex)
             {
-                case 0:
-                    saving.fallAsleepTime = 5;
-                    break;
-                case 1:
-                    saving.fallAsleepTime = 10;
-                    break;
-                case 2:
-                    saving.fallAsleepTime = 15;
-                    break;
-                case 3:
-                    saving.fallAsleepTime = 20;
-                    break;
-                case 4:
-                    saving.fallAsleepTime = 25;
-                    break;
-                case 5:
-                    saving.fallAsleepTime = 30;
-                    break;
+                case 0: saving.fallAsleepTime = 5; break;
+                case 1: saving.fallAsleepTime = 10; break;
+                case 2: saving.fallAsleepTime = 15; break;
+                case 3: saving.fallAsleepTime = 20; break;
+                case 4: saving.fallAsleepTime = 25; break;
+                case 5: saving.fallAsleepTime = 30; break;
             }
             SaveData();
         }
@@ -309,6 +286,7 @@ namespace SleepWell
                 SaveData();
             }
         }
+
 
 
         void OpenMenu(object sender, EventArgs args)

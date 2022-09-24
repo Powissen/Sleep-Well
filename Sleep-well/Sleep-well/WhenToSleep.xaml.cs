@@ -18,7 +18,6 @@ namespace SleepWell
             InitializeComponent();
             BindingContext = this;
 
-
             StreamReader sr = new StreamReader(_filePath);
             saving.darkMode = Convert.ToBoolean(sr.ReadLine());
             saving.alarmTime = DateTime.Parse(sr.ReadLine());
@@ -38,13 +37,9 @@ namespace SleepWell
 
 
             if (saving.alarmTime.Minute < 10)
-            {
                 alarmTime = saving.alarmTime.Hour + ":" + "0" + saving.alarmTime.Minute.ToString();
-            }
             else
-            {
                 alarmTime = saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
-            }
 
             if (saving.language == 1)
             {
@@ -177,14 +172,11 @@ namespace SleepWell
         void TipsForSleep(object sender, EventArgs args)
         {   
             if (saving.language == 1)
-            {
                 DisplayAlert("What to do for a good sleep? \n\n", "• Don't use the phone at bedtime \n• Observe the regular sleep time \n• Don't perform physical activity before bedtime \n• Don't go to bed with a full stomach \n• Ventilate the room before going to bed \n", "OK");
-            }
             else
-            {
                 DisplayAlert("Čo robiť pre dobrý spánok? \n\n", "• Nepoužívať pred spaním mobil \n• Dodržiavať pravidený čas zaspatia \n• Nevykonávať pred spánkom fyzickú aktivitu \n• Nechodiť do postele s plným bruchom \n• Vyvetrať miestnosť pred spánkom", "OK");
-            }
         }
+
 
 
         void OpenMainPage(object sender, EventArgs args)
