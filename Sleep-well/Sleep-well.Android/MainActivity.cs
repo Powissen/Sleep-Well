@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Plugin.LocalNotification;
-using System.IO;
 
 namespace SleepWell.Droid
 {
@@ -12,27 +11,12 @@ namespace SleepWell.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            string _filePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "dat.txt");
             base.OnCreate(savedInstanceState);
 
             NotificationCenter.CreateNotificationChannel();
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-            //if (!File.Exists(_filePath))
-            //{
-            //    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            //    alertDialog.SetTitle("Warning");
-            //    alertDialog.SetMessage("Pre správne fungovanie aplikácie je potrebné zakázať optimalizáciu batérie pre túto aplikáciu! \n\nBattery optimization for this app must be disabled for the app to work properly!");
-            //    alertDialog.SetNeutralButton("OPEN SETTINGS", delegate {
-            //        alertDialog.Dispose();
-            //        Intent intent = new Intent();
-            //        intent.SetAction(Android.Provider.Settings.ActionIgnoreBatteryOptimizationSettings);
-            //        Forms.Context.StartActivity(intent);
-            //    });
-            //    alertDialog.Show();
-            //}
 
             LoadApplication(new App());
         }

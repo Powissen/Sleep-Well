@@ -2,7 +2,6 @@
 <ContentPage
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              x:Class="SleepWell.Settings"
              BackgroundColor="White">
 
@@ -23,46 +22,40 @@
 
 
 
-        <!--Alarm-->
-        <!--<StackLayout Orientation="Horizontal">
-            <Label Text="Povoliť budík:" TextColor="{Binding textColour}" VerticalOptions="Center"/>
-                <Switch x:Name="_switch"
-                    HorizontalOptions="EndAndExpand"
-                    Toggled="OnSwitchToggled" />
-            </StackLayout>-->
+        <Label  Text="VŠEOBECNÉ NASTAVENIA" TextColor="{Binding textColour}" FontSize="20" HorizontalTextAlignment="Center" Padding="0,10,0,10" TextDecorations="Underline"/>
+        <Line Stroke="#787878" X2="500" />
+        
+        <Grid>
+            <Label x:Name="AlarmTypeText" Text="Druh budíka" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
+            <Picker x:Name="AlarmTypePicker" TextColor="{Binding textColour}" SelectedIndexChanged="AlarmTypeChange" HorizontalOptions="End" WidthRequest="100" />
+        </Grid>
+        <Line Stroke="#787878" X2="500" />
 
-
-        <StackLayout>
-            <Label x:Name="TimerHeader"  Text="Budík je nastavený na:" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="20"/>
-            <TimePicker x:Name="_timePicker"
-                    Format="HH:mm"
-                    TextColor="{Binding textColour}"
-                    FontSize="30"
-                    HorizontalOptions="Center"
-                    PropertyChanged="OnTimePickerPropertyChanged" />
-            <Line Stroke="#787878" X2="500" />
-            <Grid>
-                <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="DarkGray" TextColor="{Binding textColour}" BackgroundColor="{Binding barColour}" HorizontalOptions="Start" WidthRequest="250"/>
-                <Button x:Name="SaveButton" Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End" CornerRadius="15"/>
-            </Grid>
-            <Line Stroke="#787878" X2="500" />
-
-        </StackLayout>
-
-
-        <!--Link na multilanguage:    https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows     -->
-
-        <!--Settings options-->
         <Grid>
             <Label x:Name="FallAsleepTimeText" Text="Dĺžka zaspávania" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="FallAsleepTimePicker" TextColor="{Binding textColour}" SelectedIndexChanged="FallAsleepTimeChange" HorizontalOptions="End" WidthRequest="100" />
         </Grid>
-        <!--<Line Stroke="#787878" X2="500" />
-        <Grid>
-            <Label x:Name="DarkModeText" Text="Tmavý režim" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
-            <CheckBox x:Name="DarkModeCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_DarkMode"/>
-        </Grid>-->
         <Line Stroke="#787878" X2="500" />
+
+        <Grid>
+            <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
+            <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" WidthRequest="100" />
+        </Grid>
+        <Line Stroke="#787878" X2="500" />
+
+
+
+
+
+        <Label  Text="NASTAVENIA BUDÍKA V APLIKÁCII" TextColor="{Binding textColour}" FontSize="20" HorizontalTextAlignment="Center" Padding="0,70,0,10" TextDecorations="Underline"/>
+        <Line Stroke="#787878" X2="500" />
+
+        <Grid>
+                <Entry x:Name="_entry" Placeholder = "Tu nastavte poznámku" PlaceholderColor="DarkGray" TextColor="{Binding textColour}" BackgroundColor="{Binding barColour}" HorizontalOptions="StartAndExpand" WidthRequest="250"/>
+                <Button x:Name="SaveButton" Text="Uložiť" Clicked="AlarmNoteSave" FontSize="15"  HorizontalOptions="End" CornerRadius="15" TextColor="White" BackgroundColor="DimGray"/>
+            </Grid>
+        <Line Stroke="#787878" X2="500" />
+
         <Grid>
             <Label x:Name="SoundText" Text="Zvuk budíka" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
             <Picker x:Name="SoundPicker" TextColor="{Binding textColour}" SelectedIndexChanged="SoundChange" HorizontalOptions="End" WidthRequest="100" />
@@ -76,9 +69,10 @@
                     BackgroundColor="Transparent"/>
         </Grid>
         <Line Stroke="#787878" X2="500" />
+
         <Grid>
             <Label x:Name="SleepMusicText" Text="Hudba na zaspávanie" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
-            <CheckBox x:Name="SleepMusicCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_SleepMusic"/>
+            <CheckBox x:Name="SleepMusicCheckBox" HorizontalOptions="End" CheckedChanged="CheckBox_SleepMusic" Color="Orange"/>
             <ImageButton x:Name="SleepSoundInfo"
                     Source="info_gray.png"
                     HorizontalOptions="End"
@@ -89,10 +83,6 @@
                     BackgroundColor="Transparent"/>
         </Grid>
         <Line Stroke="#787878" X2="500" />
-        <Grid>
-            <Label x:Name="LanguageText" Text="Jazyk" HorizontalOptions="Start" TextColor="{Binding textColour}" FontSize="20" VerticalOptions="Center" Padding="2, 0, 0, 0" />
-            <Picker x:Name="LanguagePicker" TextColor="{Binding textColour}" SelectedIndexChanged="LanguageChange" HorizontalOptions="End" WidthRequest="100" />
-        </Grid>
-        <Line Stroke="#787878" X2="500" />
+             
     </StackLayout>
 </ContentPage>

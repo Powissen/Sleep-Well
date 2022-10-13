@@ -24,6 +24,7 @@ namespace SleepWell
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
+            saving.builtinTimer = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             if (saving.language == 1)

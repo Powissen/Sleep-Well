@@ -16,7 +16,6 @@ namespace SleepWell
     {
         public string textColour { get; set; } = "Black";
         public string barColour { get; set; } = "LightGray";
-        DateTime _triggerTime;
         Saving saving = new Saving();
         string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt");
         ISimpleAudioPlayer player = CrossSimpleAudioPlayer.Current;
@@ -29,7 +28,7 @@ namespace SleepWell
             BindingContext = this;
 
             LanguagePicker.Items.Add("Slovenčina");
-            LanguagePicker.Items.Add("English");
+            //LanguagePicker.Items.Add("English");
 
             FallAsleepTimePicker.Items.Add("5m");
             FallAsleepTimePicker.Items.Add("10m");
@@ -37,6 +36,10 @@ namespace SleepWell
             FallAsleepTimePicker.Items.Add("20m");
             FallAsleepTimePicker.Items.Add("25m");
             FallAsleepTimePicker.Items.Add("30m");
+
+            AlarmTypePicker.Items.Add("Externý        (Odporúčané)");
+            AlarmTypePicker.Items.Add("V aplikácii   (Experimentálne)");
+
 
             BackgroundColor = Color.FromHex("1f1f1f");
             textColour = "LightGray";
@@ -54,6 +57,7 @@ namespace SleepWell
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
+            saving.builtinTimer = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             LanguagePicker.SelectedIndex = saving.language;
@@ -68,18 +72,17 @@ namespace SleepWell
                 case 30:FallAsleepTimePicker.SelectedIndex = 5; break;
             }
 
+            if (saving.builtinTimer)
+                AlarmTypePicker.SelectedIndex = 1;
+            else
+                AlarmTypePicker.SelectedIndex = 0;
 
-            //if (saving.darkMode)
-            //{
-            //    DarkModeCheckBox.IsChecked = true;
-            //}
 
             if (saving.musicToSleep)
             {
                 SleepMusicCheckBox.IsChecked = true;
             }
 
-            _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
 
             if (saving.alarmNote != "")
             {
@@ -92,68 +95,16 @@ namespace SleepWell
             StreamWriter writer = new StreamWriter(_filePath, false);
             {
                 writer.WriteLine(saving.darkMode);
-                writer.WriteLine(_timePicker.Time);
+                writer.WriteLine(saving.alarmTime);
                 writer.WriteLine(saving.language);
                 writer.WriteLine(saving.alarmNote);
                 writer.WriteLine(saving.alarmSound);
                 writer.WriteLine(saving.fallAsleepTime);
                 writer.WriteLine(saving.musicToSleep);
+                writer.Write(saving.builtinTimer);
                 writer.Close();
             }
         }
-
-
-
-        void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName == "Time")
-            {
-                SetTriggerTime();
-            }
-        }
-
-
-
-        void OnSwitchToggled(object sender, ToggledEventArgs args)
-        {
-            SetTriggerTime();
-        }
-
-        void SetTriggerTime()
-        {
-            _triggerTime = DateTime.Today + _timePicker.Time;
-            if (_triggerTime < DateTime.Now)
-            {
-                _triggerTime += TimeSpan.FromDays(1);
-            }
-            SaveData();
-        }
-
-        // -------------------------------------------------------------------------------------------
-        //private void CheckBox_DarkMode(object sender, CheckedChangedEventArgs e)
-        //{
-
-        //    if (DarkModeCheckBox.IsChecked)
-        //    {
-        //        BackgroundColor = Color.FromHex("1f1f1f");
-        //        textColour = "LightGray";
-        //        barColour = "Black";
-        //        OnPropertyChanged(nameof(textColour));
-        //        OnPropertyChanged(nameof(barColour));
-        //        saving.darkMode = true;
-        //        SaveData();
-        //    }
-        //    else
-        //    {
-        //        BackgroundColor = Color.White;
-        //        textColour = "Black";
-        //        barColour = "LightGray";
-        //        OnPropertyChanged(nameof(textColour));
-        //        OnPropertyChanged(nameof(barColour));
-        //        saving.darkMode = false;
-        //        SaveData();
-        //    }
-        //}
         
         //Multilanguage:  https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization/text?pivots=windows 
 
@@ -162,12 +113,10 @@ namespace SleepWell
             if (LanguagePicker.SelectedIndex == 0)
             {
                 Header_Description.Text = "Nastavenia";
-                TimerHeader.Text = "Nastavenie budíka";
                 _entry.Placeholder = "Tu nastavte poznámku";
                 SaveButton.Text = "ULOŽIŤ";
-                FallAsleepTimeText.Text = "Dĺžka zaspatia";
+                FallAsleepTimeText.Text = "Dĺžka zaspávania";
                 SleepMusicText.Text = "Hudba na zaspávanie";
-                //DarkModeText.Text = "Tmavý režim";
                 LanguageText.Text = "Jazyk";
                 SoundText.Text = "Zvuk budíka";
                 SoundPicker.Items.Clear();
@@ -181,12 +130,10 @@ namespace SleepWell
             else
             {
                 Header_Description.Text = "Settings";
-                TimerHeader.Text = "Alarm setting";
                 _entry.Placeholder = "Set a note here";
                 SaveButton.Text = "SAVE";
                 FallAsleepTimeText.Text = "Fall asleep time";
                 SleepMusicText.Text = "Music for sleep";
-                //DarkModeText.Text = "Dark mode";
                 LanguageText.Text = "Language";
                 SoundText.Text = "Alarm sound";
                 SoundPicker.Items.Clear();
@@ -285,6 +232,16 @@ namespace SleepWell
                 saving.musicToSleep = false;
                 SaveData();
             }
+        }
+
+        private void AlarmTypeChange(object sender, EventArgs e)
+        {
+            switch (AlarmTypePicker.SelectedIndex)
+            {
+                case 0: saving.builtinTimer = false; break;
+                case 1: saving.builtinTimer = true; break;
+            }
+            SaveData();
         }
 
 

@@ -21,18 +21,26 @@
         </Grid>
 
 
-        <Label 
+        <!--<Label 
             x:Name="time"
             Text="{Binding Time}" 
             HorizontalOptions="Center" 
             FontSize="100"
             TextColor="White"
             FontFamily="SevenSegment"
-            Padding="0,60,0,0"/>
+            Padding="0,60,0,0"/>-->
+
+        <Label x:Name="TimerHeader"  Text="NASTAVENIE BUDÍKA" TextColor="{Binding textColour}" HorizontalOptions="Center" FontSize="25" Margin="0,80,0,0"/>
+        <TimePicker x:Name="_timePicker"
+                    Format="HH:mm"
+                    TextColor="{Binding textColour}"
+                    FontSize="120"
+                    HorizontalOptions="Center"
+                    FontFamily="SevenSegment"
+                    PropertyChanged="OnTimePickerPropertyChanged" />
 
 
-        <Label x:Name="alarmTime" HorizontalTextAlignment="Center" TextColor="White" Padding="0,130,0,0" FontSize="23" />
-        <Button x:Name="SleepButton"  Text="Idem spať" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 35" />
-        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 10" />
+        <Button x:Name="SleepButton"  Text="Idem spať" TextColor="White" BackgroundColor="Orange" Clicked="StartSleeping" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="EndAndExpand" Margin="0, 0, 0, 30" />
+        <Button x:Name="WhenToSleepButton" Text="Kedy ísť spať?" TextColor="White" Clicked="OpenWhenToSleep" BackgroundColor="DimGray" HorizontalOptions="Center" WidthRequest="300" HeightRequest="40" CornerRadius="15" VerticalOptions="End" Margin="0, 0, 0, 30" />
     </StackLayout>
 </ContentPage>

@@ -11,5 +11,6 @@ namespace SleepWell
         public int alarmSound;
         public int fallAsleepTime;
         public bool musicToSleep;
+        public bool builtinTimer;
     }
 }

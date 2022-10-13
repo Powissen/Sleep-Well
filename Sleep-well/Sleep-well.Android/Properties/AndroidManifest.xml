@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.sleepwell.sleepwell" android:installLocation="internalOnly">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0.1" package="com.sleepwell.sleepwell" android:installLocation="internalOnly">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="29" />
 	<application android:label="SleepWell" android:theme="@style/MainTheme" android:icon="@drawable/SleepWellLogo"></application>
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -7,5 +7,5 @@
 	<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 	<uses-permission android:name="android.permission.PARTIAL_WAKE_LOCK" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />	
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>

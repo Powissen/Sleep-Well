@@ -26,14 +26,12 @@ namespace SleepWell
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
+            saving.builtinTimer = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
-            if (saving.darkMode)
-            {
                 BackgroundColor = Color.FromHex("1f1f1f");
                 textColour = "LightGray";
                 OnPropertyChanged(nameof(textColour));
-            }
 
 
             if (saving.alarmTime.Minute < 10)

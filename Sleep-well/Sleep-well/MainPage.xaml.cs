@@ -1,9 +1,8 @@
-﻿using System;
+﻿using SleepWell.Services;
+using System;
+using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Collections;
 using Xamarin.Forms;
-using Plugin.SharedTransitions;
 
 namespace SleepWell
 {
@@ -17,10 +16,9 @@ namespace SleepWell
         {
             InitializeComponent();
             BindingContext = this;
-            OnTimerTick();
-            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
 
             //File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dat.txt"));
+
 
             if (!File.Exists(_filePath))
             {
@@ -31,6 +29,7 @@ namespace SleepWell
                 saving.alarmSound = 2;
                 saving.fallAsleepTime = 15;
                 saving.musicToSleep = true;
+                saving.builtinTimer = false;
 
                 using (StreamWriter writer = new StreamWriter(_filePath, false))
                 {
@@ -41,6 +40,7 @@ namespace SleepWell
                     writer.WriteLine(saving.alarmSound);
                     writer.WriteLine(saving.fallAsleepTime);
                     writer.WriteLine(saving.musicToSleep);
+                    writer.Write(saving.builtinTimer);
                     writer.Close();
                 }
             }
@@ -53,39 +53,18 @@ namespace SleepWell
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
+            saving.builtinTimer = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             if (saving.language == 1)
             {
-                if (saving.alarmTime.Minute < 10)
-                {
-                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
-                }
-                else
-                {
-                    alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
-                }
                 SleepButton.Text = "I GO TO SLEEP";
                 WhenToSleepButton.Text = "WHEN TO GO TO BED?";
             }
-            else
-            {
-                if (saving.alarmTime.Minute < 10)
-                {
-                    alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
-                }
-                else
-                {
-                    alarmTime.Text = "Budík je nastavený na: " + saving.alarmTime.Hour + ":" + saving.alarmTime.Minute.ToString();
-                }
-            }
+            _timePicker.Time = new TimeSpan(Convert.ToInt32(saving.alarmTime.Hour), Convert.ToInt32(saving.alarmTime.Minute), Convert.ToInt32(saving.alarmTime.Second));
         }
 
-        //async void OpenSettings(object sender, EventArgs args)
-        //{
-        //    App.Current.MainPage = new Settings();
-        //}
-        async void OpenMenu(object sender, EventArgs args)
+        void OpenMenu(object sender, EventArgs args)
         {
             App.Current.MainPage = new Menu();
         }
@@ -95,22 +74,31 @@ namespace SleepWell
         }
         void StartSleeping(object sender, EventArgs args)
         {
-            App.Current.MainPage = new SleepScreen();
+            if (saving.builtinTimer)
+                App.Current.MainPage = new SleepScreen();
+            else
+                DependencyService.Resolve<IForegroundService>().OpenAlarmClock();
         }
 
-        bool OnTimerTick()
-        {
-            if (DateTime.Now.Minute < 10)
-            {
-                Time = (DateTime.Now.Hour + ":0" + DateTime.Now.Minute).ToString();
-            }
-            else
-            {
 
-                Time = (DateTime.Now.Hour + ":" + DateTime.Now.Minute).ToString();
+        void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "Time")
+            {
+                StreamWriter writer = new StreamWriter(_filePath, false);
+                {
+                    writer.WriteLine(saving.darkMode);
+                    writer.WriteLine(_timePicker.Time);
+                    writer.WriteLine(saving.language);
+                    writer.WriteLine(saving.alarmNote);
+                    writer.WriteLine(saving.alarmSound);
+                    writer.WriteLine(saving.fallAsleepTime);
+                    writer.WriteLine(saving.musicToSleep);
+                    writer.Write(saving.builtinTimer);
+                    writer.Close();
+                }
             }
-            OnPropertyChanged(nameof(Time));
-            return true;
         }
     }
 }
+

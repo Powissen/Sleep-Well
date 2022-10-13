@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace SleepWell
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SleepScreen : ContentPage, TickTimerInterface
+    public partial class SleepScreen : ContentPage
     {
         private bool sleeping;
         private int[] sleepMusicCycles = new int[] { 0, 0 };
@@ -43,6 +43,7 @@ namespace SleepWell
             saving.alarmSound = Convert.ToInt32(sr.ReadLine());
             saving.fallAsleepTime = Convert.ToInt32(sr.ReadLine());
             saving.musicToSleep = Convert.ToBoolean(sr.ReadLine());
+            saving.builtinTimer = Convert.ToBoolean(sr.ReadLine());
             sr.Close();
 
             if (saving.musicToSleep)
@@ -56,8 +57,7 @@ namespace SleepWell
 
             if (saving.language == 1)
             {
-                StopSleepButton.Text = "Stop sleep";
-                Warning.Text = "Please leave this window opened and turn off the screen";
+                Warning.Text = "Please leave the app opened, turn on the sound for the apps and turn off the screen";
                 if (saving.alarmTime.Minute < 10)
                     alarmTime.Text = "The alarm is set to: " + saving.alarmTime.Hour + ":0" + saving.alarmTime.Minute.ToString();
                 else
@@ -86,17 +86,22 @@ namespace SleepWell
                 writer.WriteLine(saving.alarmSound);
                 writer.WriteLine(saving.fallAsleepTime);
                 writer.WriteLine(saving.musicToSleep);
+                writer.Write(saving.builtinTimer);
                 writer.Close();
             }
+
+            //if (saving.language == 1)
+            //{
+            //    DisplayAlert("Warning", "Your device is running an Android version older than 8.0! The alarm may not work properly!", "OK");
+            //}
+            //else
+            //{
+            //    DisplayAlert("Upozornenie", "Vaše zariadenie používa verziu Androidu staršiu než 8.0! Budík nemusí správne fungovať!", "OK");
+            //}
+
+            DependencyService.Resolve<IForegroundService>().StartMyForegroundService();
             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
             OnTimerTick();
-            DependencyService.Resolve<IForegroundService>().StartMyForegroundService();
-        }
-
-
-        public static void Tick()
-        {
-            DependencyService.Resolve<TickTimerInterface>().OnTimerTick();
         }
 
 
